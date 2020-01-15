@@ -1,5 +1,6 @@
 # PWM
 党务管理系统的设计与实现，包括文档、代码及相关资料。
+
 简单的git使用教程：https://www.cnblogs.com/jackchensir/p/8306448.html
 
 用命令将代码拉下来并提交的基本操作流程如下：
@@ -9,7 +10,7 @@
 
 1.克隆主分支项目并新建分支
 
-1.1 git clone "项目地址"         --克隆项目
+1.1 git clone "git@github.com:zxg666/PWM.git"         --克隆项目
 
 1.2 cd PWM              --切换到项目路径下
 
