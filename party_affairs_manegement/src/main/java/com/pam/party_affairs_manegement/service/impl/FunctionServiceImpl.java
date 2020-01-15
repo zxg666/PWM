@@ -1,0 +1,66 @@
+package com.pam.party_affairs_manegement.service.impl;
+
+import com.pam.party_affairs_manegement.domain.Function;
+import com.pam.party_affairs_manegement.mapper.FunctionMapper;
+import com.pam.party_affairs_manegement.service.FunctionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class FunctionServiceImpl implements FunctionService {
+
+    @Autowired
+    private FunctionMapper functionMapper;
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
+    public Function selectById(Integer functionId) {
+        return this.functionMapper.selectById(functionId);
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
+    public List<Function> selectAllByVisit() {
+        return this.functionMapper.selectAllByVisit();
+    }
+
+    @Override
+    public List<Function> selectByLevel(Integer level) {
+        List<Function> functionListAll = this.functionMapper.selectByLevel(level);
+        for (Function function:functionListAll) {
+            if (function.getParentId() == null) {
+                List<Function> functionList = this.functionMapper.selectByParent(function.getFunctionId());
+                function.setFunctionList(functionList);
+            }
+        }
+        return functionListAll;
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+    public Function insert(Integer functionId) {
+        return this.functionMapper.insert(functionId);
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+    public Function update(Integer functionId) {
+        return this.functionMapper.update(functionId);
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
+    public Function delete(Integer functionId) {
+        return this.functionMapper.delete(functionId);
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
+    public List<Function> selectByParent(Integer parentId) {
+        return this.functionMapper.selectByParent(parentId);
+    }
+}

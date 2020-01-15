@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pam.party_affairs_manegement.mapper.FunctionMapper">
+    <resultMap type="com.pam.party_affairs_manegement.domain.Function" id="BaseResultMap">
+        <id column="function_id" property="functionId" jdbcType="INTEGER"/>
+        <result column="function_name" property="functionName" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="permission" property="permission" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="visit" property="visit" jdbcType="INTEGER"/>
+        <result column="child" property="child" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from tb_function
+        where function_id=#{functionId}
+    </select>
+    <select id="selectAllByVisit" resultMap="BaseResultMap">
+        select * from tb_function where 1=1 and child is null order by visit desc limit 0,15;
+    </select>
+    <select id="selectByLevel" resultMap="BaseResultMap">
+        select * from tb_function
+        where level=#{level}
+    </select>
+    <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.Function">
+        insert into tb_function(function_id,function_name,parent_id,permission,status)
+        values(#{functionName},#{parentId},#{permission},#{status})
+    </insert>
+    <update id="update" parameterType="com.pam.party_affairs_manegement.domain.Function">
+        update tb_function set function_name=#{functionName},parent_id=#{parentId},
+                               permission=#{permission},status=#{status}
+        where function_id=#{functionId}
+    </update>
+    <delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.Function">
+        delete tb_function
+        where function_id=#{functionId}
+    </delete>
+    <select id="selectByParent" resultMap="BaseResultMap">
+        select * from tb_function
+        where parent_id=#{parentId}
+    </select>
+</mapper>
