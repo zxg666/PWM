@@ -28,4 +28,5 @@ git checkout -          --切换到主分支
 git pull                --将主分支上的代码拉取下来
 
 git push                --将代码推送到远程分支上
+
 push成功之后会有successful提示。
