@@ -10,7 +10,7 @@
 
 1.克隆主分支项目并新建分支
 
-1.1 git clone "git@github.com:zxg666/PWM.git"         --克隆项目
+1.1 git clone "https://github.com/zxg666/PWM.git"         --克隆项目
 
 1.2 cd PWM              --切换到项目路径下
 
