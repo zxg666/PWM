@@ -19,7 +19,10 @@ public class FunctionServiceImpl implements FunctionService {
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
     public Function selectById(Integer functionId) {
-        return this.functionMapper.selectById(functionId);
+        Function function = this.functionMapper.selectById(functionId);
+        List<Function> functionList = this.functionMapper.selectByParent(function.getFunctionId());
+        function.setFunctionList(functionList);
+        return function;
     }
 
     @Override
@@ -42,20 +45,20 @@ public class FunctionServiceImpl implements FunctionService {
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Function insert(Integer functionId) {
-        return this.functionMapper.insert(functionId);
+    public int insert(Function function) {
+        return this.functionMapper.insert(function);
     }
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Function update(Integer functionId) {
-        return this.functionMapper.update(functionId);
+    public int update(Function function) {
+        return this.functionMapper.update(function);
     }
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Function delete(Integer functionId) {
-        return this.functionMapper.delete(functionId);
+    public int delete(Function function) {
+        return this.functionMapper.delete(function);
     }
 
     @Override

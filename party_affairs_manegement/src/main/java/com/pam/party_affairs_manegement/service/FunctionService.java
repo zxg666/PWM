@@ -15,13 +15,13 @@ public interface FunctionService {
     List<Function> selectByLevel(Integer level);
 
     //增加功能
-    Function insert(Integer functionId);
+    int insert(Function function);
 
     //修改功能
-    Function update(Integer functionId);
+    int update(Function function);
 
     //删除功能
-    Function delete(Integer functionId);
+    int delete(Function function);
 
     //按父ID查找功能
     List<Function> selectByParent(Integer parentId);

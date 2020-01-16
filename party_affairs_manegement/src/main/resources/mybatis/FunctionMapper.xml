@@ -24,7 +24,7 @@
         where level=#{level}
     </select>
     <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.Function">
-        insert into tb_function(function_id,function_name,parent_id,permission,status)
+        insert into tb_function(function_name,parent_id,permission,status)
         values(#{functionName},#{parentId},#{permission},#{status})
     </insert>
     <update id="update" parameterType="com.pam.party_affairs_manegement.domain.Function">

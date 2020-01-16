@@ -3,6 +3,7 @@ package com.pam.party_affairs_manegement.controller;
 import com.pam.party_affairs_manegement.domain.Function;
 import com.pam.party_affairs_manegement.domain.Users;
 import com.pam.party_affairs_manegement.service.FunctionService;
+import com.pam.party_affairs_manegement.service.UserRoleOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +18,17 @@ public class PageController {
 
     @Autowired
     private FunctionService functionService;
+    @Autowired
+    private UserRoleOrganizationService userRoleOrganizationService;
 
      //跳转到首页
     @RequestMapping("index")
-    //, @RequestParam("userId") Integer userId
-    public String index(Model model){
+    public String index(Model model, @RequestParam("userId") Integer userId,
+                        @RequestParam("organization") String organization){
         List<Function> hotFunction = this.functionService.selectAllByVisit();
         model.addAttribute("hotFunction",hotFunction);
-        System.out.println(hotFunction);
+        System.out.println("userId:"+userId);
+        System.out.println("organization:"+organization);
         return "index";
     }
     //跳转到主页面

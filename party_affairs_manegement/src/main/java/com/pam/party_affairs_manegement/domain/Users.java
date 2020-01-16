@@ -30,6 +30,6 @@ public class Users {
     private  Integer role;
     //status	tinyint
     private  boolean status;
-    //entry_time	datetime
+    //entry_time	date
     private Date entryTime;
 }

@@ -7,7 +7,7 @@
 		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
 		<result column="password" property="password" jdbcType="VARCHAR"/>
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
-		<result column="birth" property="birth" jdbcType="VARCHAR"/>
+		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
 		<result column="img" property="img" jdbcType="VARCHAR"/>
 		<result column="organization" property="organization" jdbcType="INTEGER"/>
 		<result column="role" property="role" jdbcType="INTEGER"/>
@@ -15,8 +15,8 @@
 		<result column="entry_time" property="entryTime" jdbcType="DATE"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Users">
-		insert into tb_user(user_name,password,sex,birth,img,organization,role,status,entry_time)
-		values(#{userName},#{password},#{sex},#{birth},#{img},#{organization},#{status},#{entryTime})
+		insert into tb_user(user_name,password,sex,birthday,img,organization,role,status,entry_time)
+		values(#{userName},#{password},#{sex},#{birthday},#{img},#{organization},#{role},#{status},#{entryTime})
 	</insert>
 
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -34,7 +34,7 @@
 	</select>
 
 	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Users">
-		update tb_user set user_name=#{userName},password=#{password}, sex=#{sex},birth=#{birth}, img=#{img}, organization=#{organization}, role=#{role},
+		update tb_user set user_name=#{userName},password=#{password}, sex=#{sex},birthday=#{birthday}, img=#{img}, organization=#{organization}, role=#{role},
 		                status=#{status},entry_time={entryTime}
 		where user_id=#{userId}
 	</update>

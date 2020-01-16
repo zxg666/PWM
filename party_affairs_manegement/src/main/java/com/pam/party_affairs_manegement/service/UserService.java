@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
     //添加用户
-    Users insert(Integer userId);
+    int insert(Users user);
     //按姓名查找用户
     List<Users> selectByName(String userName);
     //查找所有用户
@@ -15,9 +15,9 @@ public interface UserService {
     //根据ID查找用户
     Users selectById(Integer userId);
     //修改用户信息
-    Users update(Integer userId);
+    int update(Users user);
     //用户图片上传
-    Users upImg(Integer userId);
+    int upImg(Users user);
     //根据ID删除用户
-    Users delete(Integer userId);
+    int delete(Users user);
 }

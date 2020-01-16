@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pam.party_affairs_manegement.mapper.UserRoleOrganizationMapper">
+    <resultMap type="com.pam.party_affairs_manegement.domain.UserRoleOrganization" id="BaseResultMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="organization" property="organization" jdbcType="VARCHAR"/>
+        <result column="entry_time" property="entryTime" jdbcType="DATE"/>
+    </resultMap>
+    <select id="selectByUser" resultMap="BaseResultMap">
+        select * from tb_user_role_organization
+        where user_id=#{userId}
+    </select>
+    <select id="selectByOrganization" resultMap="BaseResultMap">
+        select * from tb_user_role_organization
+        where organization=#{organization} order by role_id asc limit 0,1
+    </select>
+    <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        insert into tb_user_role_organization(user_id,role_id,organization,entry_time)
+        values(#{userId},#{roleId},#{organization},#{entryTime})
+    </insert>
+    <update id="update" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        update tb_user_role_organization set user_id=#{userId},role_id=#{roleId},organization=#{organization},entry_time=#{entryTime}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        delete from tb_user_role_organization
+        where id=#{id}
+    </delete>
+</mapper>

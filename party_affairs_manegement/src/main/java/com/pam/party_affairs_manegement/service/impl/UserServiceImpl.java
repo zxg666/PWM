@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
-    public Users insert(Integer userId) {
-        return this.userMapper.insert(userId);
+    public int insert(Users user) {
+        return this.userMapper.insert(user);
     }
 
     @Override
@@ -41,19 +41,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=false)
-    public Users update(Integer userId) {
-        return this.userMapper.update(userId);
+    public int update(Users user) {
+        return this.userMapper.update(user);
     }
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=false)
-    public Users upImg(Integer userId) {
-        return this.userMapper.upImg(userId);
+    public int upImg(Users user) {
+        return this.userMapper.upImg(user);
     }
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
-    public Users delete(Integer userId) {
-        return this.userMapper.delete(userId);
+    public int delete(Users user) {
+        return this.userMapper.delete(user);
     }
 }
