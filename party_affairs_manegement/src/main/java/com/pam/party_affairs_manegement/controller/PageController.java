@@ -1,8 +1,8 @@
 package com.pam.party_affairs_manegement.controller;
 
-import com.pam.party_affairs_manegement.domain.Function;
-import com.pam.party_affairs_manegement.domain.Users;
-import com.pam.party_affairs_manegement.service.FunctionService;
+import com.pam.party_affairs_manegement.domain.RoleFunction;
+import com.pam.party_affairs_manegement.domain.UserRoleOrganization;
+import com.pam.party_affairs_manegement.service.RoleFunctionService;
 import com.pam.party_affairs_manegement.service.UserRoleOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import java.util.List;
 public class PageController {
 
     @Autowired
-    private FunctionService functionService;
+    private RoleFunctionService roleFunctionService;
     @Autowired
     private UserRoleOrganizationService userRoleOrganizationService;
 
@@ -25,10 +25,13 @@ public class PageController {
     @RequestMapping("index")
     public String index(Model model, @RequestParam("userId") Integer userId,
                         @RequestParam("organization") String organization){
-        List<Function> hotFunction = this.functionService.selectAllByVisit();
-        model.addAttribute("hotFunction",hotFunction);
-        System.out.println("userId:"+userId);
-        System.out.println("organization:"+organization);
+        //按热度展示15个功能
+        UserRoleOrganization userRoleOrganization = this.userRoleOrganizationService.selectByOrganization(userId,organization);
+        List<RoleFunction> roleFunction = this.roleFunctionService.selectByVisit(userRoleOrganization.getRoleId());
+        System.out.println("hotFunction:"+roleFunction);
+        model.addAttribute("hotFunction",roleFunction);
+        model.addAttribute("userId",userId);
+        model.addAttribute("organization",organization);
         return "index";
     }
     //跳转到主页面

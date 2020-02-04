@@ -27,13 +27,14 @@ public class FunctionServiceImpl implements FunctionService {
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
-    public List<Function> selectAllByVisit() {
-        return this.functionMapper.selectAllByVisit();
+    public List<Function> selectAllByVisit(Integer parentId) {
+        return this.functionMapper.selectAllByVisit(parentId);
     }
 
     @Override
-    public List<Function> selectByLevel(Integer level) {
-        List<Function> functionListAll = this.functionMapper.selectByLevel(level);
+    @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
+    public List<Function> selectByLevel() {
+        List<Function> functionListAll = this.functionMapper.selectByLevel();
         for (Function function:functionListAll) {
             if (function.getParentId() == null) {
                 List<Function> functionList = this.functionMapper.selectByParent(function.getFunctionId());

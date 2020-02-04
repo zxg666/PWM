@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RoleService {
     //添加角色
-    int insert(Role user);
+    int insert(Role role);
     //按名称查找角色
     List<Role> selectByName(String role);
     //查找所有角色

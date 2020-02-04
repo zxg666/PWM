@@ -24,10 +24,6 @@ public class Users {
     private  Date birthday;
     //img	varchar
     private String img;
-    //organization	int
-    private Integer organization;
-    //role	int
-    private  Integer role;
     //status	tinyint
     private  boolean status;
     //entry_time	date

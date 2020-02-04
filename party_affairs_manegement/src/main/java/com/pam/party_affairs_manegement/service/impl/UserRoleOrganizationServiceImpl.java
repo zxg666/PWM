@@ -16,8 +16,6 @@ import java.util.List;
 public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationService {
     @Autowired
     private UserRoleOrganizationMapper userRoleOrganizationMapper;
-    @Autowired
-    private RoleFunctionMapper roleFunctionMapper;
 
     @Override
     public List<UserRoleOrganization> selectByUser(Integer userId) {
@@ -25,8 +23,8 @@ public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationServ
     }
 
     @Override
-    public UserRoleOrganization selectByOrganization(String organization) {
-        return this.userRoleOrganizationMapper.selectByOrganization(organization);
+    public UserRoleOrganization selectByOrganization(Integer userId,String organization) {
+        return this.userRoleOrganizationMapper.selectByOrganization(userId,organization);
     }
 
     @Override

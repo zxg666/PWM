@@ -9,10 +9,10 @@ public interface FunctionService {
     Function selectById(Integer functionId);
 
     //按访问量展示功能
-    List<Function> selectAllByVisit();
+    List<Function> selectAllByVisit(Integer parentId);
 
     //按查级别功能
-    List<Function> selectByLevel(Integer level);
+    List<Function> selectByLevel();
 
     //增加功能
     int insert(Function function);

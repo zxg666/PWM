@@ -9,14 +9,12 @@
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
 		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
 		<result column="img" property="img" jdbcType="VARCHAR"/>
-		<result column="organization" property="organization" jdbcType="INTEGER"/>
-		<result column="role" property="role" jdbcType="INTEGER"/>
 		<result column="status" property="status" jdbcType="TINYINT"/>
 		<result column="entry_time" property="entryTime" jdbcType="DATE"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Users">
-		insert into tb_user(user_name,password,sex,birthday,img,organization,role,status,entry_time)
-		values(#{userName},#{password},#{sex},#{birthday},#{img},#{organization},#{role},#{status},#{entryTime})
+		insert into tb_user(user_name,password,sex,birthday,img,status,entry_time)
+		values(#{userName},#{password},#{sex},#{birthday},#{img},#{status},#{entryTime})
 	</insert>
 
 	<select id="selectAll" resultMap="BaseResultMap">

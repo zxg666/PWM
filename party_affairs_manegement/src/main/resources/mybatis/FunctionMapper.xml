@@ -17,11 +17,11 @@
         where function_id=#{functionId}
     </select>
     <select id="selectAllByVisit" resultMap="BaseResultMap">
-        select * from tb_function where 1=1 and child is null order by visit desc limit 0,15;
+        select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,4
     </select>
     <select id="selectByLevel" resultMap="BaseResultMap">
         select * from tb_function
-        where level=#{level}
+        where level=1
     </select>
     <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.Function">
         insert into tb_function(function_name,parent_id,permission,status)

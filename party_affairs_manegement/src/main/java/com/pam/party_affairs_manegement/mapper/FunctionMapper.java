@@ -9,10 +9,10 @@ import java.util.List;
 public interface FunctionMapper {
     //按ID查找功能
     Function selectById(Integer functionId);
-    //按热度展示15个功能
-    List<Function> selectAllByVisit();
+    //按热度展示功能
+    List<Function> selectAllByVisit(Integer parentId);
     //按查找级别功能
-    List<Function> selectByLevel(Integer level);
+    List<Function> selectByLevel();
     //增加功能
     int insert(Function function);
     //修改功能

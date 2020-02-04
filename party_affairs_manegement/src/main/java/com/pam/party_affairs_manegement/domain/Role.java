@@ -21,5 +21,5 @@ public class Role {
     //status	tinyint
     private boolean status;
     //角色的功能
-    private List<Function> functionList;
+    private List<RoleFunction> RoleFunctions;
 }

@@ -1,12 +1,10 @@
-package com.pam.party_affairs_manegement.mapper;
+package com.pam.party_affairs_manegement.service;
 
 import com.pam.party_affairs_manegement.domain.RoleFunction;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface RoleFunctionMapper {
+public interface RoleFunctionService {
     //根据角色查找
     List<RoleFunction> selectByRole(Integer role);
     //根据角色查热点功能

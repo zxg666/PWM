@@ -9,8 +9,8 @@ import java.util.List;
 public interface UserRoleOrganizationMapper {
     //根据用户查找
     List<UserRoleOrganization> selectByUser(Integer userId);
-    //根据组织查权限最大角色
-    UserRoleOrganization selectByOrganization(String organization);
+    //根据用户组织查权限最大角色
+    UserRoleOrganization selectByOrganization(Integer userId,String organization);
     //增加记录
     int insert(UserRoleOrganization userRoleOrganization);
     //更新记录

@@ -2,8 +2,10 @@ package com.pam.party_affairs_manegement.service.impl;
 
 import com.pam.party_affairs_manegement.domain.Function;
 import com.pam.party_affairs_manegement.domain.Role;
+import com.pam.party_affairs_manegement.domain.RoleFunction;
 import com.pam.party_affairs_manegement.mapper.RoleMapper;
 import com.pam.party_affairs_manegement.service.FunctionService;
+import com.pam.party_affairs_manegement.service.RoleFunctionService;
 import com.pam.party_affairs_manegement.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,13 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
+    private RoleFunctionService roleFunctionService;
+    @Autowired
     private FunctionService functionService;
 
     @Override
-    public int insert(Role user) {
-        return this.roleMapper.insert(user);
+    public int insert(Role role) {
+        return this.roleMapper.insert(role);
     }
 
     @Override
@@ -35,7 +39,8 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role selectById(Integer roleId) {
         Role role = this.roleMapper.selectById(roleId);
-        Function functionList = this.functionService.selectById(role.getRoleId());
+        List<RoleFunction> roleFunctions = this.roleFunctionService.selectByRole(roleId);
+        role.setRoleFunctions(roleFunctions);
         return role;
     }
 
