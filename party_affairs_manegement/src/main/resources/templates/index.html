@@ -43,11 +43,8 @@
         	<i class="home"><a href="javascript:;"></a></i>
         	<div class="nav-wrap">
                 <ul class="nav ue-clear">
-                   <!-- <li th:each="functions,functionListStatus:${hotFunction.functionList}">
-                        <a href="#" th:text="${functions.functionName}"></a>
-                    </li>-->
-                    <li th:each="hotFunction,hotFunctionStatus:${hotFunction}">
-                        <ul>
+                    <li style="width: 450px;overflow:hidden;" th:each="hotFunction,hotFunctionStatus:${hotFunction}">
+                        <ul class="hot-function" style="width: 450px;overflow: hidden;">
                             <li th:each="functionList,functionListStatus:${hotFunction.functionList}">
                                 <a href="#" th:text="${functionList.functionName}"></a>
                             </li>
@@ -152,7 +149,7 @@ $('.exitDialog input[type=button]').click(function(e) {
     $('.exitDialog').Dialog('close');
 	
 	if($(this).hasClass('ok')){
-		window.location.href = "/userManagement/userLogin"	;
+		window.location.href = "/page/login"	;
 	}
 });
 

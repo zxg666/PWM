@@ -25,7 +25,7 @@ public class PageController {
     @RequestMapping("index")
     public String index(Model model, @RequestParam("userId") Integer userId,
                         @RequestParam("organization") String organization){
-        //按热度展示15个功能
+        //按热度展示12个功能
         UserRoleOrganization userRoleOrganization = this.userRoleOrganizationService.selectByOrganization(userId,organization);
         List<RoleFunction> roleFunction = this.roleFunctionService.selectByVisit(userRoleOrganization.getRoleId());
         System.out.println("hotFunction:"+roleFunction);
@@ -43,5 +43,15 @@ public class PageController {
     @RequestMapping("login")
     public  String login(){
         return "login";
+    }
+    //跳转到表单页
+    @RequestMapping("form")
+    public String form(){
+        return "form";
+    }
+    //跳转到表格页
+    @RequestMapping("table")
+    public String table(){
+        return "table";
     }
 }
