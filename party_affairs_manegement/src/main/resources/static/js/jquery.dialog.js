@@ -1,4 +1,5 @@
-﻿(function($) {
+﻿
+(function($) {
     /**
      * @name Dialog
      * @class 弹出框,可拖拽，设置宽和高，有无遮罩，
@@ -250,6 +251,7 @@
 				//e.preventDefault();
 				//获取最新值
 				left = _define.left, top = _define.top, tempX = e.clientX, tempY = e.clientY, winWidth = $(window).width(), winHeight = $(window).height();
+
 				if(!self.options.fixed){//定位为absolute
 					winHeight = $(document).outerHeight();
 				}
@@ -376,6 +378,7 @@
          * @param {string} _param
 		 */
         setFunc : function(_func, _param) {
+
             var self = this, options = this.options, firstButton = options.buttons[0];
 			firstButton.callBack = _func;
 			firstButton.param = _param;

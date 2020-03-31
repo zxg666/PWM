@@ -59,6 +59,8 @@ jQuery.fn.pagination = function(maxentries, opts) {
 		 */
 		function drawLinks() {
 			panel.empty();
+			$pagin.empty();
+			panel.append($pagin);
 			var interval = getInterval();
 			var np = numPages();
 			var getClickHandler = function(page_id) {
@@ -84,7 +86,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 				if (appendopts.classes) {
 					lnk.addClass(appendopts.classes);
 				}
-				panel.append(lnk);
+				$pagin.append(lnk);
 			}
 			// 上一页
 			if (opts.prev_text && (current_page > 0 || opts.prev_show_always)) {
@@ -101,7 +103,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 				}
 				if (opts.num_edge_entries < interval[0] && opts.ellipse_text) {
 					jQuery("<span>" + opts.ellipse_text + "</span>")
-							.appendTo(panel);
+							.appendTo($pagin);
 				}
 			}
 			// 中间的页码
@@ -113,7 +115,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 				if (np - opts.num_edge_entries > interval[1]
 						&& opts.ellipse_text) {
 					jQuery("<span>" + opts.ellipse_text + "</span>")
-							.appendTo(panel);
+							.appendTo($pagin);
 				}
 				var begin = Math.max(np - opts.num_edge_entries, interval[1]);
 				for (var i = begin; i < np; i++) {
@@ -147,7 +149,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 			}
 			//设置跳到第几页
 			if(opts.setPageNo){
-				  panel.append("<div class='goto'><span class='text'>跳转到</span><input type='text'/><span class='page'>页</span><button type='button' class='ue-button long2'>确定</button></div>");	
+				  $("<div class='goto'><span class='text'>转到第</span><input type='text'/><span class='page'>页</span><a href='javascript:;'>转</a></div>").insertBefore($pagin);	
 			}
 		}
 
@@ -157,7 +159,10 @@ jQuery.fn.pagination = function(maxentries, opts) {
 		opts.items_per_page = (!opts.items_per_page || opts.items_per_page < 0)
 				? 1
 				: opts.items_per_page;
-		var panel = jQuery(this);
+		var panel = jQuery(this),
+			$pagin = $('<div class="pagin-list"></div>');
+			
+		
 		this.selectPage = function(page_id) {
 			pageSelected(page_id);
 		}
@@ -183,7 +188,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 		}else{
 			drawLinks();
 		}
-		$(this).find(".goto button").live("click",function(evt){
+		$(this).find(".goto a").on("click",function(evt){
 			var setPageNo = $(this).parent().find("input").val();
 			if(setPageNo!=null && setPageNo!=""&&setPageNo>0&&setPageNo<=numPages()){
 				pageSelected(setPageNo-1, evt);

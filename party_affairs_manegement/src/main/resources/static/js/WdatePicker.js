@@ -1,3 +1,7 @@
+/*
+ * My97 DatePicker 4.8 Beta4
+ * License: http://www.my97.net/dp/license.asp
+ */
 var $dp,WdatePicker;(function(){var $={
 $langList:[
  {name:"en",charset:"UTF-8"},

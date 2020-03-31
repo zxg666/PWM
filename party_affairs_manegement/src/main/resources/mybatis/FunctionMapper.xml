@@ -11,13 +11,14 @@
         <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="visit" property="visit" jdbcType="INTEGER"/>
         <result column="child" property="child" jdbcType="INTEGER"/>
+        <result column="target" property="target" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectById" resultMap="BaseResultMap">
         select * from tb_function
         where function_id=#{functionId}
     </select>
     <select id="selectAllByVisit" resultMap="BaseResultMap">
-        select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,4
+        select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,3
     </select>
     <select id="selectByLevel" resultMap="BaseResultMap">
         select * from tb_function

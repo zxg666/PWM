@@ -29,6 +29,8 @@ public class Function {
     private Integer visit;
     //child	    int
     private Integer child;
+    //target	varchar
+    private String target;
     //子功能集
     private List<Function> functionList;
 }

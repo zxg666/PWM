@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:background="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户登录</title>
+<link href="/css/login.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/verificationLogin.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".button").click(function () {
+            var lock = true;
+            /* //生成的验证码
+             var checkCode = $("#checkCode").html();
+             //输入的验证码
+             var valiDate = $("#valiDate").val();
+             if (valiDate.length == 0) {
+                 alert("请输入验证码！");
+                 lock = false;
+             }if (valiDate.toUpperCase() != checkCode.toUpperCase()) {
+                 alert("验证码输入有误！");
+                 lock = false;
+             }
+*/
+
+            if(lock) {
+                //获取用户ID
+                var userId = $("#userId").val();
+                //获取密码
+                var password = $("#password").val();
+                //获取组织名
+                var  organization = $("#organization").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/user/userLogin",
+                    data: {"userId": userId, "password": password,"organization":organization},
+                    dataType: "json",
+                    success: function(data){
+                        if (data.suc) {
+                            window.location.href = "/page/index?userId="+userId+"&organization="+organization;
+                        } if (data.fail) {
+                            alert("密码错误");
+                            window.location.href = "/page/login";
+                        }
+                        if (data.nobody){
+                            alert("该用户不存在，请你核对账号或者联系组织申请账号！");
+                            window.location.href = "/page/login";
+                        }
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+</head> 
+<body> 
+<div class="div_top">党务管理网站</div>
+<div class="login">
+    <div class="message">用户登录</div>
+    <div id="darkbannerwrap"></div>
+    <form method="post">
+		<input name="action" value="login" type="hidden">
+		<input name="username" placeholder="用户名" required="" type="text" id="userId">
+		<hr class="hr15">
+		<input name="password" placeholder="密码" required="" type="password" id="password">
+		<hr class="hr15">
+		<div class="styleWrap">
+			<select name="organization" id="organization">
+				<option value="昆明学院">昆明学院</option>
+				<option value="信息工程学院">信息工程学院</option>
+				<option value="16级软件工程2班">16级软件工程2班</option>
+			</select>
+		</div>
+		<hr class="hr15">
+		<input type="text" style=" width: 180px;" placeholder="验证码" required="" id="valiDate" name="valiDate" />
+		<div id="checkCode" class="code" onclick="createCode(4)"></div>
+		<input value="登录" style="width:100%;" type="button" class="button" id="login_btn">
+		<hr class="hr20">
+		  <a onClick="alert('请联系管理员')">忘记密码</a>
+	</form>
+</div>
+<div class="copyright">版权所有@<span style="color:#f77118">2020 </span>昆明学院毕业设计</div>
+</body>
+</html>
