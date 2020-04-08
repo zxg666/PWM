@@ -17,12 +17,16 @@
         select * from tb_user_role_organization
         where user_id=#{userId} and organization=#{organization} order by role_id asc limit 0,1
     </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from tb_user_role_organization
+        where id=#{id}
+    </select>
     <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
         insert into tb_user_role_organization(user_id,role_id,organization,entry_time)
         values(#{userId},#{roleId},#{organization},#{entryTime})
     </insert>
     <update id="update" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
-        update tb_user_role_organization set user_id=#{userId},role_id=#{roleId},organization=#{organization},entry_time=#{entryTime}
+        update tb_user_role_organization set id=#{id},user_id=#{userId},role_id=#{roleId},organization=#{organization}
         where id=#{id}
     </update>
     <delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">

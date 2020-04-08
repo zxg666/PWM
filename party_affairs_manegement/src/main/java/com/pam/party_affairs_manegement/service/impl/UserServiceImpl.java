@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,13 +48,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=false)
-    public int upImg(Users user) {
-        return this.userMapper.upImg(user);
+    public int upImg(Integer userId) {
+        return this.userMapper.upImg(userId);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=false)
+    public int delete(Integer userId) {
+        return this.userMapper.delete(userId);
     }
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
-    public int delete(Users user) {
-        return this.userMapper.delete(user);
+    public List<Map<String, Object>> selectLikeMap(String userName, String organization) {
+        return this.userMapper.selectLikeMap(userName,organization);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public Map<String, Object> selectMapById(Integer ID) {
+        return this.userMapper.selectMapById(ID);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Map<String, Object>> selectMap() {
+        return this.userMapper.selectMap();
     }
 }

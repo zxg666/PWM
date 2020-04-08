@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:background="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户登录</title>
@@ -69,9 +69,7 @@
 		<hr class="hr15">
 		<div class="styleWrap">
 			<select name="organization" id="organization">
-				<option value="昆明学院">昆明学院</option>
-				<option value="信息工程学院">信息工程学院</option>
-				<option value="16级软件工程2班">16级软件工程2班</option>
+				<option th:each="organizationList,organizationListStatus:${organizationList}" th:text="${organizationList.organizationName}"></option>
 			</select>
 		</div>
 		<hr class="hr15">

@@ -1,12 +1,4 @@
-﻿/** 
- 
- @Name： laydate皮肤：默认
- @Author：贤心
- @Site：http://sentsin.com/layui/laydate
- 
-**/
-
-.laydate-icon{border:1px solid #C6C6C6; background-image:url(icon.png)}
+﻿.laydate-icon{border:1px solid #C6C6C6; background-image:url(icon.png)}
 
 .laydate_body .laydate_box,
 .laydate_body .laydate_ym,

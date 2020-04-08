@@ -4,6 +4,7 @@ package com.pam.party_affairs_manegement.service;
 import com.pam.party_affairs_manegement.domain.Users;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     //添加用户
@@ -17,7 +18,13 @@ public interface UserService {
     //修改用户信息
     int update(Users user);
     //用户图片上传
-    int upImg(Users user);
+    int upImg(Integer userId);
     //根据ID删除用户
-    int delete(Users user);
+    int delete(Integer userId);
+    //用户管理
+    List<Map<String,Object>> selectMap();
+    //按用户名和角色查找
+    List<Map<String,Object>> selectLikeMap(String userName,String organization);
+    //按MapID查找
+    Map<String, Object> selectMapById(Integer ID);
 }

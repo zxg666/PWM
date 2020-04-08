@@ -28,6 +28,11 @@ public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationServ
     }
 
     @Override
+    public UserRoleOrganization selectById(Integer id) {
+        return this.userRoleOrganizationMapper.selectById(id);
+    }
+
+    @Override
     public int insert(UserRoleOrganization userRole) {
         return this.userRoleOrganizationMapper.insert(userRole);
     }
@@ -38,7 +43,7 @@ public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationServ
     }
 
     @Override
-    public int delete(UserRoleOrganization userRole) {
-        return this.userRoleOrganizationMapper.delete(userRole);
+    public int delete(Integer id) {
+        return this.userRoleOrganizationMapper.delete(id);
     }
 }

@@ -9,12 +9,12 @@
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
 		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
 		<result column="img" property="img" jdbcType="VARCHAR"/>
-		<result column="status" property="status" jdbcType="TINYINT"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
 		<result column="entry_time" property="entryTime" jdbcType="DATE"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Users">
-		insert into tb_user(user_name,password,sex,birthday,img,status,entry_time)
-		values(#{userName},#{password},#{sex},#{birthday},#{img},#{status},#{entryTime})
+		insert into tb_user(user_id,user_name,password,sex,birthday,img,status,entry_time)
+		values(#{userId},#{userName},#{password},#{sex},#{birthday},#{img},#{status},#{entryTime})
 	</insert>
 
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -32,8 +32,7 @@
 	</select>
 
 	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Users">
-		update tb_user set user_name=#{userName},password=#{password}, sex=#{sex},birthday=#{birthday}, img=#{img}, organization=#{organization}, role=#{role},
-		                status=#{status},entry_time={entryTime}
+		update tb_user set user_id=#{userId},user_name=#{userName},password=#{password},sex=#{sex},birthday=#{birthday},img=#{img},status=#{status}
 		where user_id=#{userId}
 	</update>
 	
@@ -42,8 +41,68 @@
 		where user_id=#{userId}
 	</update>
 	
-	<delete id="deleteById" parameterType="com.pam.party_affairs_manegement.domain.Users">
+	<delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.Users">
 		delete from tb_user
 		where user_id=#{userId} 
 	</delete>
+	<select id="selectMap" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+		    u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+		    u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.status AS "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectLikeMap" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.status "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where u.user_name like concat('%', #{userName}, '%')
+		and uro.organization=#{organization}
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectMapById" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.status "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where uro.id=#{ID}
+		ORDER BY u.user_id,uro.role_id
+	</select>
 </mapper>

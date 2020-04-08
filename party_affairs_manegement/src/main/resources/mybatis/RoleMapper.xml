@@ -6,7 +6,7 @@
 		<id column="role_id" property="roleId" jdbcType="INTEGER"/>
 		<result column="role" property="role" jdbcType="VARCHAR"/>
 		<result column="description" property="description" jdbcType="VARCHAR"/>
-		<result column="status" property="status" jdbcType="TINYINT"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Role">
 		insert into tb_role(role,description,status)

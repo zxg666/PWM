@@ -19,7 +19,7 @@ public class Role {
     //description	varchar
     private String description;
     //status	tinyint
-    private boolean status;
+    private String status;
     //角色的功能
     private List<RoleFunction> RoleFunctions;
 }

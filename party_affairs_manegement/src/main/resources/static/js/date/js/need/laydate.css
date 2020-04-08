@@ -1,12 +1,4 @@
-﻿/** 
- 
- @Name： laydate 核心样式
- @Author：贤心
- @Site：http://sentsin.com/layui/laydate
- 
-**/
-
-html{_background-image:url(about:blank); _background-attachment:fixed;}
+﻿html{_background-image:url(about:blank); _background-attachment:fixed;}
 .laydate_body .laydate_box, .laydate_body .laydate_box *{margin:0; padding:0;}
 .laydate-icon,
 .laydate-icon-default,

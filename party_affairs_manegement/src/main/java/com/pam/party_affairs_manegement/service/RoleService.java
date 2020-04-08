@@ -8,7 +8,7 @@ public interface RoleService {
     //添加角色
     int insert(Role role);
     //按名称查找角色
-    List<Role> selectByName(String role);
+    Role selectByName(String role);
     //查找所有角色
     List<Role> selectAll();
     //根据ID查找角色以及其功能

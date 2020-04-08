@@ -1,13 +1,6 @@
-/****************************************************************
- *																*		
- * 						      代码库							*
- *                        www.dmaku.com							*
- *       		  努力创建完善、持续更新插件以及模板			*
- * 																*
-****************************************************************/
 *,h1,.table,label,td,tr,h2{padding: 0;margin: 0}
-
 .top_out{padding-bottom: 10px;}
+.table tr{margin: 20px;}
 .table tr td:nth-child(2n+1){background-color: #f9f9f9;text-align: right;font-weight: bold;color: #46647e;font-size: 14px;width:120px;line-height: 40px }
 .top{ border:1px solid #c1d3de;border-top: none}
 .top td{border: 2px #efefef solid}

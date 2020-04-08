@@ -2,8 +2,11 @@ package com.pam.party_affairs_manegement.mapper;
 
 import com.pam.party_affairs_manegement.domain.Users;
 import org.apache.ibatis.annotations.Mapper;
+import sun.awt.SunHints;
 
+import java.security.Key;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -18,7 +21,13 @@ public interface UserMapper {
     //修改用户信息
     int update(Users user);
     //用户图片上传
-    int upImg(Users user);
+    int upImg(Integer userId);
     //删除用户
-    int delete(Users user);
+    int delete(Integer userId);
+    //用户管理
+    List<Map<String, Object>> selectMap();
+    //按用户名和角色查找
+    List<Map<String,Object>> selectLikeMap(String userName,String organization);
+    //按MapID查找
+    Map<String, Object> selectMapById(Integer ID);
 }

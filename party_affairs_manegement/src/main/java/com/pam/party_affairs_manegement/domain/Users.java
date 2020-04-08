@@ -21,11 +21,11 @@ public class Users {
     //sex	varchar
     private String sex;
     //birthday	datetime
-    private  Date birthday;
+    private  String birthday;
     //img	varchar
     private String img;
     //status	tinyint
-    private  boolean status;
+    private  String status;
     //entry_time	date
     private Date entryTime;
 }

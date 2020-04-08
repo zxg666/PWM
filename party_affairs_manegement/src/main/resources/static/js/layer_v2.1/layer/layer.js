@@ -16,7 +16,7 @@
     }, f = {
         v: "2.1", ie6: !!a.ActiveXObject && !a.XMLHttpRequest, index: 0, path: e.getPath, config: function (a, b) {
             var d = 0;
-            return a = a || {}, f.cache = e.config = c.extend(e.config, a), f.path = e.config.path || f.path, "string" == typeof a.extend && (a.extend = [a.extend]), f.use("skin/layer.css", a.extend && a.extend.length > 0 ? function g() {
+            return a = a || {}, f.cache = e.config = c.extend(e.config, a), f.path = e.config.path || f.path, "string" == typeof a.extend && (a.extend = [a.extend]), f.use("/skin/layer.css", a.extend && a.extend.length > 0 ? function g() {
                 var c = a.extend;
                 f.use(c[c[d] ? d : d - 1], d < c.length ? function () {
                     return ++d, g
@@ -329,6 +329,6 @@
     }, "function" == typeof define ? define(function () {
         return e.run(), f
     }) : function () {
-        e.run(), f.use("skin/layer.css")
+        e.run(), f.use("/skin/layer.css")
     }()
 }(window);

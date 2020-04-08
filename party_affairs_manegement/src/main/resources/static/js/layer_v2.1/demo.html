@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>layer-更懂你的web弹窗解决方案</title>
 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
-<script src="layer/layer.js"></script>
+<script src="/layer/layer.js"></script>
 
 <style>
 html{background-color:#E3E3E3; font-size:14px; color:#000; font-family:'微软雅黑'}
@@ -52,8 +52,6 @@ pre{font-family:'微软雅黑'}
     </div>
 
 </div>
-
-
 <div class="box" style="text-align:center">
     <a href="http://layer.layui.com/?form=local" target="_blank">更多示例</a>
     <a href="http://layer.layui.com/api.html" target="_blank">使用文档</a>
@@ -66,7 +64,7 @@ pre{font-family:'微软雅黑'}
 
 //加载扩展模块
 layer.config({
-    extend: 'extend/layer.ext.js'
+    extend: '/extend/layer.ext.js'
 });
 
 //页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕

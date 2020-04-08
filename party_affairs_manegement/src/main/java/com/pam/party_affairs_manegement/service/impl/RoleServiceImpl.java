@@ -27,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> selectByName(String role) {
+    public Role selectByName(String role) {
         return this.roleMapper.selectByName(role);
     }
 

@@ -4,9 +4,11 @@ import com.pam.party_affairs_manegement.domain.Organization;
 import com.pam.party_affairs_manegement.mapper.OrganizationMapper;
 import com.pam.party_affairs_manegement.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
     private OrganizationMapper organizationMapper;
@@ -17,7 +19,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<Organization> selectByName(String organization) {
+    public Organization selectByName(String organization) {
         return this.organizationMapper.selectByName(organization);
     }
 

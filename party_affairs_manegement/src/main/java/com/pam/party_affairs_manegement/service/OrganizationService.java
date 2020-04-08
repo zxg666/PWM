@@ -8,7 +8,7 @@ public interface OrganizationService {
     //添加组织
     int insert(Organization organization);
     //按名称查找组织
-    List<Organization> selectByName(String organization);
+    Organization selectByName(String organization);
     //查找所有组织
     List<Organization> selectAll();
     //根据ID查找组织
