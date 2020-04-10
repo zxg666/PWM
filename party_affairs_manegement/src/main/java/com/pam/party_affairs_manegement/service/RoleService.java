@@ -16,5 +16,5 @@ public interface RoleService {
     //修改角色信息
     int update(Role role);
     //删除角色
-    int delete(Role role);
+    int delete(Integer roleId);
 }

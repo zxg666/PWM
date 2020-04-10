@@ -19,8 +19,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization selectByName(String organization) {
-        return this.organizationMapper.selectByName(organization);
+    public Organization selectByName(String organizationName,String organizationLeader) {
+        return this.organizationMapper.selectByName(organizationName,organizationLeader);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public int delete(Organization organization) {
-        return this.organizationMapper.delete(organization);
+    public int delete(Integer organizationId) {
+        return this.organizationMapper.delete(organizationId);
     }
 }

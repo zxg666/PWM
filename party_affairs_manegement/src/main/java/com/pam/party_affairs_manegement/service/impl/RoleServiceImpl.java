@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public int delete(Role role) {
-        return this.roleMapper.delete(role);
+    public int delete(Integer roleId) {
+        return this.roleMapper.delete(roleId);
     }
 }

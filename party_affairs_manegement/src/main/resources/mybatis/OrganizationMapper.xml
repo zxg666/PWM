@@ -5,12 +5,15 @@
 	<resultMap type="com.pam.party_affairs_manegement.domain.Organization" id="BaseResultMap">
 		<id column="organization_id" property="organizationId" jdbcType="INTEGER"/>
 		<result column="organization_name" property="organizationName" jdbcType="VARCHAR"/>
+		<result column="organization_leader" property="organizationLeader" jdbcType="VARCHAR"/>
+		<result column="organization_info" property="organizationInfo" jdbcType="VARCHAR"/>
 		<result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+		<result column="telephone" property="telephone" jdbcType="VARCHAR"/>
 		<result column="entry_time" property="entryTime" jdbcType="DATE"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Organization">
-		insert into tb_organization(organization_name,parent_id,entry_time)
-		values(#{organizationName},#{parentId},#{entryTime})
+		insert into tb_organization(organization_name,organization_leader,organization_info,telephone,parent_id,entry_time)
+		values(#{organizationName},#{organizationLeader},#{organizationInfo},#{telephone},#{parentId},#{entryTime})
 	</insert>
 
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -19,7 +22,8 @@
 
 	<select id="selectByName" resultMap="BaseResultMap">
 		select * from tb_organization
-		where organization_id=#{organizationId}
+		where organization_name=#{organizationName}
+		or organization_leader=#{organizationLeader}
 	</select>
 
 	<select id="selectById" resultMap="BaseResultMap">
@@ -28,7 +32,8 @@
 	</select>
 
 	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Organization">
-		update tb_organization set role=#{organizationName},parent_id=#{parentId},entry_time=#{entryTime}
+		update tb_organization set organization_id=#{organizationId},organization_name=#{organizationName},organization_leader=#{organizationLeader},
+		                           organization_info=#{organizationInfo},telephone=#{telephone},parent_id=#{parentId}
 		where organization_id=#{organizationId}
 	</update>
 	

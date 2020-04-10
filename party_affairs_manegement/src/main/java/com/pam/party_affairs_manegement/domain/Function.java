@@ -17,14 +17,14 @@ public class Function {
     private Integer functionId;
     // function_name	varchar
     private String functionName;
-    // function_name	varchar
+    // level	int
     private Integer level;
     // parent_id	int
     private Integer parentId;
     // permission	varchar
     private String permission;
-    // status	tinyint
-    private boolean status;
+    // status	varchar
+    private String status;
     //visit	    int
     private Integer visit;
     //child	    int

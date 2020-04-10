@@ -8,7 +8,7 @@
         <result column="level" property="level" jdbcType="INTEGER"/>
         <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
         <result column="permission" property="permission" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
         <result column="visit" property="visit" jdbcType="INTEGER"/>
         <result column="child" property="child" jdbcType="INTEGER"/>
         <result column="target" property="target" jdbcType="VARCHAR"/>
@@ -16,6 +16,13 @@
     <select id="selectById" resultMap="BaseResultMap">
         select * from tb_function
         where function_id=#{functionId}
+    </select>
+    <select id="selectById1" resultMap="BaseResultMap">
+        select * from tb_function
+        where function_id=#{functionId}
+    </select>
+    <select id="selectALL" resultMap="BaseResultMap">
+        select * from tb_function
     </select>
     <select id="selectAllByVisit" resultMap="BaseResultMap">
         select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,3
@@ -25,16 +32,16 @@
         where level=1
     </select>
     <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.Function">
-        insert into tb_function(function_name,parent_id,permission,status)
-        values(#{functionName},#{parentId},#{permission},#{status})
+        insert into tb_function(function_name,level,parent_id,permission,child,target)
+        values(#{functionName},#{level},#{parentId},#{permission},#{child},#{target})
     </insert>
     <update id="update" parameterType="com.pam.party_affairs_manegement.domain.Function">
-        update tb_function set function_name=#{functionName},parent_id=#{parentId},
-                               permission=#{permission},status=#{status}
+        update tb_function set function_name=#{functionName},level=#{level},parent_id=#{parentId},
+                               permission=#{permission},status=#{status},child=#{child},target=#{target}
         where function_id=#{functionId}
     </update>
     <delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.Function">
-        delete tb_function
+        delete from tb_function
         where function_id=#{functionId}
     </delete>
     <select id="selectByParent" resultMap="BaseResultMap">

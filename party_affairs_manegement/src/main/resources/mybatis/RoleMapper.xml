@@ -28,7 +28,7 @@
 	</select>
 
 	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Role">
-		update tb_role set role=#{role},description=#{description},status=#{status}
+		update tb_role set role_id=#{roleId},role=#{role},description=#{description},status=#{status}
 		where role_id=#{roleId}
 	</update>
 	

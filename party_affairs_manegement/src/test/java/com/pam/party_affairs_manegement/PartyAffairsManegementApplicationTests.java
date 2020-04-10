@@ -159,7 +159,7 @@ public class PartyAffairsManegementApplicationTests {
     public void deleteRole(){
         Role role = new Role();
         role.setRoleId(8);
-        this.roleMapper.delete(role);
+        this.roleMapper.delete(1);
     }
 
     @Autowired

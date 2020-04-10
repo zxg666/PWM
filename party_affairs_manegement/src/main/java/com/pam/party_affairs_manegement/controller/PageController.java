@@ -28,6 +28,8 @@ public class PageController {
     private OrganizationService organizationService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private FunctionService functionService;
 
      //跳转到首页
     @RequestMapping("index")
@@ -113,6 +115,49 @@ public class PageController {
         List<Role> roleList = this.roleService.selectAll();
         model.addAttribute("roleList",roleList);
         return "system/user/user_edit";
+    }
+
+    //跳转到角色编辑页
+    @RequestMapping("roleEdit/{roleId}")
+    public String roleEdit(@PathVariable("roleId") Integer roleId,Model model){
+        Role roleRecord = this.roleService.selectById(roleId);
+        model.addAttribute("roleRecord",roleRecord);
+        System.out.println("roleRecord:"+roleRecord);
+        model.addAttribute("roleId",roleId);
+        System.out.println("roleId:"+roleId);
+        return "system/role/role_edit";
+    }
+
+    //跳转到菜单新增页
+    @RequestMapping("function_add")
+    public String function_add(){
+        return "system/function/function_add";
+    }
+
+    //跳转到菜单编辑页
+    @RequestMapping("functionEdit/{functionId}")
+    public String functionEdit(@PathVariable("functionId") Integer functionId,Model model){
+       Function function = this.functionService.selectById1(functionId);
+        model.addAttribute("function",function);
+        System.out.println("function:"+function);
+        model.addAttribute("functionId",functionId);
+        System.out.println("functionId:"+functionId);
+        return "system/function/function_edit";
+    }
+
+    //跳转到党组织新增页
+    @RequestMapping("organization_add")
+    public String organization_add(){
+        return "basic/organization/organization_add";
+    }
+
+    //跳转到党组织编辑页
+    @RequestMapping("organizationEdit/{organizationId}")
+    public String organizationEdit(@PathVariable("organizationId") Integer organizationId,Model model){
+        Organization organization = this.organizationService.selectById(organizationId);
+        model.addAttribute("organization",organization);
+        System.out.println("organization:"+organization);
+        return "basic/organization/organization_edit";
     }
 
     //跳转到成功页面

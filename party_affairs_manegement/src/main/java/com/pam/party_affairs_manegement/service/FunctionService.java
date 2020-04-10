@@ -5,8 +5,14 @@ import com.pam.party_affairs_manegement.domain.Function;
 import java.util.List;
 
 public interface FunctionService {
+    //查全部
+    List<Function> selectALL();
+
     //按ID查找功能
     Function selectById(Integer functionId);
+
+    //唯一单菜单
+    Function selectById1(Integer functionId);
 
     //按访问量展示功能
     List<Function> selectAllByVisit(Integer parentId);
@@ -21,7 +27,7 @@ public interface FunctionService {
     int update(Function function);
 
     //删除功能
-    int delete(Function function);
+    int delete(Integer functionId);
 
     //按父ID查找功能
     List<Function> selectByParent(Integer parentId);

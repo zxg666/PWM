@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>菜单添加</title>
+    <link href="/css/tail.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript">
+        function change() {
+            var height01 = $(window).height();
+            $(".top").css('height', height01 - 35+"px");
+        }
+    </script>
+</head>
+
+<body onload="change()" style="border-radius: 8px">
+<form id="form_demo" action="/function/add">
+<div class="top">
+    <div>
+        <div class="top_out">
+            <table class="table" style="height: 450px;">
+                <tbody>
+                <tr>
+                    <td style="text-align: left;border-top: none;color: #1aa917">添加菜单</td>
+                </tr>
+                <tr>
+                    <td>菜单名称：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="functionName" name="functionName"></td>
+                    <td>菜单级别：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="level" name="level"></td>
+                </tr>
+                <tr>
+                    <td>父级ID：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="parentId" name="parentId"></td>
+                    <td>菜单路径</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="permission" name="permission"></td>
+                </tr>
+                <tr>
+                    <td>子功能数：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="child" name="child"></td>
+                    <td>展示栏位</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" id="target" name="target"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bot_btn">
+        <input class="btn" type="submit" value="保存"/>
+        <button class="btn btn1"><a href="/user/userManagement" target="right">返回</a></button>
+    </div>
+</div>
+</form>
+</body>
+<script src="/js/date/js/laydate.js"></script>
+<script type="text/javascript">
+    //时间格式化函数
+    function getFormatTime(time) {
+        var time = new Date(parseInt(time));
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+    }
+</script>
+</html>
