@@ -47,6 +47,18 @@
                     </select></td>
                 </tr>
                 <tr>
+                    <td>民族：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" name="national" th:value="${userRoleOrganization.national}"></td>
+                    <td>国籍：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" name="nativePlace" th:value="${userRoleOrganization.nativePlace}"></td>
+                </tr>
+                <tr>
+                    <td>学历：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" name="education" th:value="${userRoleOrganization.education}"></td>
+                    <td>电话：</td>
+                    <td colspan = "3" style="text-align: left"><input type="text" class="text" name="telephone" th:value="${userRoleOrganization.telephone}"></td>
+                </tr>
+                <tr>
                     <td>性别：</td>
                     <td colspan = "3" style="text-align: left"><select id="sex" name="sex">
                         <option th:selected="${userRoleOrganization.sex} eq '男' ">男</option>
@@ -70,17 +82,4 @@
 </form>
 </body>
 <script src="/js/date/js/laydate.js"></script>
-<script type="text/javascript">
-    //时间格式化函数
-    function getFormatTime(time) {
-        var time = new Date(parseInt(time));
-        var y = time.getFullYear();
-        var m = time.getMonth() + 1;
-        var d = time.getDate();
-        var h = time.getHours();
-        var mm = time.getMinutes();
-        var s = time.getSeconds();
-        return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
-    }
-</script>
 </html>

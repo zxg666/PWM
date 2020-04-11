@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/info-mgt.css" />
+    <style>
+        .tree_left{box-sizing:border-box;overflow-y: auto;width:19%;border: 1px #c1d3de solid;margin-right: 1%;border-top:none;}
+        .tree_left h6,.tree_right h6{line-height: 30px;font-weight: bold;padding-left: 6px ;color: #000;font-size: 14px}
+        .tree_left_top{margin: 6px}
+        .tree_input input{border: 1px #ccc solid;margin:3px 0 0 10px;border-radius: 4px;
+        }
+        .layui-layer-title{background:url(/images/righttitlebig.png) repeat-x;font-weight:bold;color:#46647e; border:1px solid #c1d3de;height: 33px;line-height: 33px;}
+        .tabe_bot label{width: 70px;text-align: right;font-size: 14px;font-weight: 900;color: #46647e}
+        .l_left{float: left}
+        .tabe_bot input,.tabe_bot  select{width: 180px;height: 30px;border-radius: 6px;margin:0 20px 0 0;border: none;border: 1px #ccc solid}
+        .tabe_btn{width: 60px;height: 30px;background-color: #68b86c;border: none;border-radius: 6px;color: #fff}
+
+        div#rMenu {position:absolute; visibility:hidden; top:0; background-color: #99c9db;text-align: left;padding: 2px;z-index: 999}
+        div#rMenu ul li{ margin: 1px 0;padding: 5px 15px;cursor: pointer;list-style: none outside none;background-color: #5a8cc4;color: #fff  }
+        div#rMenu ul li:hover{color: #000;background-color: #ccc}
+        #rMenu ul{margin: 0;padding: 0}
+        .ztree_add_div {
+            width:200px;
+            height:100px;
+            border:1px solid #cccccc;
+            padding-top:10px;
+            padding-bottom:10px;
+            display:none;
+        }
+        .ztree_add_div p {
+            padding-bottom:10px;
+            padding-top:10px;
+        }
+        .bot_btn .btn{width: 40px;height: 24px;background-color: #68b86c;border: none;border-radius: 6px;color: #fff;margin-right: 15px;}
+        .bot_btn .btn1{background-color: #c1d3de;border: none;border-radius: 6px;color: #000;margin-right: 0}
+        .bot_btn{width: 100%;height: 30px;font-size:13px;text-align:center;}
+    </style>
+
+    <script src="/js/jquery.js"></script>
+    <script>
+        function change() {
+            var height01 = $(window).height();
+            $(".tree_left").css('height', height01 - 35+"px");
+        }
+    </script>
+    <title>党员信息</title>
+</head>
+<body onload="change()">
+<div class="title"><h2>党员信息</h2></div>
+<div class="l_left" style="width: 100%">
+<div class="query">
+    <form action="/BI/memberList">
+    <div class="tabe_bot">
+        <div class="l_left"><label>用户名：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
+        <button class="tabe_btn " type="submit">查询</button>
+        <div class="clear"></div>
+    </div>
+    </form>
+</div>
+<div class="table-box">
+    <table id="table" class="table_style"
+           data-toggle="table" data-pagination="true">
+        <thead>
+        <tr>
+            <th data-checkbox="true" data-field="id">ID</th>
+            <th data-field="userId" data-sortable="true" data-align="center">党员编号</th>
+            <th data-sortable="true" data-field="userName" data-align="center">党员姓名</th>
+            <th data-sortable="true" data-field="nativePlace" data-align="center">籍贯</th>
+            <th data-field="sex" data-align="center" data-sortable="true">党员性别</th>
+            <th data-field="national" data-align="center" data-sortable="true">民族</th>
+            <th data-field="birthday" data-sortable="true"  data-align="center">出生日期</th>
+            <th data-field="role" data-align="center">职务</th>
+            <th data-field="partyDate" data-sortable="true"  data-align="center">入党时间</th>
+            <th data-field="organization" data-sortable="true" data-align="center">所在党组织组织</th>
+            <th data-field="partyIntroducer" data-align="center" data-sortable="true">入党介绍人</th>
+            <th data-field="telephone" data-align="center">电话</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user,userListStatus:${userList}">
+            <td th:text="${user.ID}"></td>
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.nativePlace}"></td>
+            <td th:text="${user.sex}"></td>
+            <td th:text="${user.national}"></td>
+            <td th:text="${user.birthday}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.partyDate}"></td>
+            <td th:text="${user.organization}"></td>
+            <td th:text="${user.partyIntroducer}"></td>
+            <td th:text="${user.telephone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagination ue-clear"></div>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/person.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-table.js"></script>
+<script src="/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/js/date/js/laydate.js"></script>
+<script src="/js/layer_v2.1/layer/layer.js"></script>
+</html>

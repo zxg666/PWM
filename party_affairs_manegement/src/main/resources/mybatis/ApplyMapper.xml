@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pam.party_affairs_manegement.mapper.ApplyMapper">
+	<resultMap type="com.pam.party_affairs_manegement.domain.Apply" id="BaseResultMap">
+		<id column="eop_id" property="eopId" jdbcType="INTEGER"/>
+		<result column="eop_name" property="eopName" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="VARCHAR"/>
+		<result column="national" property="national" jdbcType="VARCHAR"/>
+		<result column="native_place" property="nativePlace" jdbcType="VARCHAR"/>
+		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
+		<result column="post" property="post" jdbcType="VARCHAR"/>
+		<result column="education" property="education" jdbcType="VARCHAR"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="application_date" property="applicationDate" jdbcType="DATE"/>
+		<result column="opinion" property="opinion" jdbcType="VARCHAR"/>
+		<result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+	</resultMap>
+	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Apply">
+		insert into tb_apply(eop_id,eop_name,sex,birthday,national,native_place,post,telephone,education,title,content,application_date,opinion)
+		values(#{eopId},#{eopName},#{sex},#{birthday},#{national},#{nativePlace},#{post},#{telephone},#{education},#{title},#{content},#{applicationDate},#{opinion})
+	</insert>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from tb_apply
+	</select>
+	<select id="selectByNameAndTitle" resultMap="BaseResultMap">
+		select * from tb_apply
+		where eop_name lIKE concat('%',#{eopName},'%')
+		or title LIKE  concat('%',#{title},'%')
+	</select>
+	<select id="selectById" resultMap="BaseResultMap">
+		select * from tb_apply
+		where eop_id=#{eopId}
+	</select>
+	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Apply">
+		update tb_apply set eop_id=#{eopId},eop_name=#{eopName},sex=#{sex},birthday=#{birthday},post=#{post},
+						   national=#{national},native_place=#{nativePlace},telephone=#{telephone},education=#{education},
+							title=#{title},content=#{content},application_date=#{applicationDate},opinion=#{opinion}
+		where eop_id=#{eopId}
+	</update>
+	<delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.Apply">
+		delete from tb_apply
+		where eop_id=#{eopId}
+	</delete>
+</mapper>

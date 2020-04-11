@@ -72,6 +72,42 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectByMember() {
+        return this.userMapper.selectByMember();
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectByActivist() {
+        return this.userMapper.selectByActivist();
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectLikeByMember(String userName) {
+        return this.userMapper.selectLikeByMember(userName);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectLikeByActivist(String userName) {
+        return this.userMapper.selectLikeByActivist(userName);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectByFlow() {
+        return this.userMapper.selectByFlow();
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    public List<Users> selectLikeByFlow(String userName) {
+        return this.userMapper.selectLikeByFlow(userName);
+    }
+
+    @Override
+    @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
     public List<Map<String, Object>> selectMap() {
         return this.userMapper.selectMap();
     }

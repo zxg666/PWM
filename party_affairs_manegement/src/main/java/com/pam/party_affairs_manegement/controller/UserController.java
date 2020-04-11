@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -105,9 +106,15 @@ public class UserController {
             user2.setImg("/upimgs/user/0.png");
             String status = user.getStatus();
             user2.setStatus(status);
+            String national = user.getNational();
+            user2.setNational(national);
+            String nativePlace = user.getNativePlace();
+            user2.setNativePlace(nativePlace);
+            String telephone = user.getTelephone();
+            user2.setTelephone(telephone);
+            String education = user.getEducation();
+            user2.setEducation(education);
             user2.setEntryTime(new Date());
-            this.userService.insert(user2);
-            System.out.println(user);
             //插入关联表相关数据
             UserRoleOrganization userRoleOrganization1 = new UserRoleOrganization();
             Role role1 = this.roleService.selectByName(role);
@@ -118,11 +125,37 @@ public class UserController {
             System.out.println("---------"+roleId);
             userRoleOrganization1.setOrganization(organization);
             userRoleOrganization1.setEntryTime(new Date());
+            //默认变化日期
+            String partyDate = "0000-00-00";
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("默认变化日期"+partyDate);
+            //改变后的日期
+            String partyDate1 = (new SimpleDateFormat("YYYY-MM-DD")).format(new Date());
+            System.out.println("改变后的日期"+partyDate1);
+            //判断是不是党员、积极分子、流动党员
+            if (roleId==6){
+                user2.setMemberFlag("是");
+                user2.setPartyDate(partyDate1);
+                System.out.println("党员！");
+            } else if (roleId==13){
+                user2.setActivistFlag("是");
+                user2.setPartyDate(partyDate1);
+                System.out.println("积极分子！");
+            }else{
+                user2.setMemberFlag("否");
+                user2.setActivistFlag("否");
+                user2.setPartyDate(partyDate);
+                System.out.println("变化日期："+new Date("0000-00-00"));
+            }
+            user2.setFlowFlag("否");
+            user2.setPartyIntroducer("无");
+            this.userService.insert(user2);
+            System.out.println(user);
             System.out.println("---------"+userRoleOrganization1);
             this.userRoleOrganizationService.insert(userRoleOrganization1);
             return "redirect:/user/userManagement";
         }else{
-            return "system/user/add";
+            return "system/user/user_add";
         }
     }
 
@@ -152,8 +185,42 @@ public class UserController {
         String birthday = user.getBirthday();
         user1.setBirthday(birthday);
         user1.setImg("/upimgs/user/0.png");
+        //默认变化日期
+        String partyDate = "0000-00-00";
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println("默认变化日期"+partyDate);
+        //改变后的日期
+        String partyDate1 = (new SimpleDateFormat("YYYY-MM-DD")).format(new Date());
+        System.out.println("改变后的日期"+partyDate1);
+        //判断是不是党员、积极分子、流动党员
+        if (roleId==6){
+            user1.setMemberFlag("是");
+            user1.setPartyDate(partyDate1);
+        } else if (roleId==13){
+            user1.setActivistFlag("是");
+            user1.setPartyDate(partyDate1);
+        }else{
+            user1.setMemberFlag("否");
+            user1.setActivistFlag("否");
+            user1.setPartyDate(partyDate);
+        }
+
+        if (userRoleOrganization1.getOrganization().equals(organization)){
+            user1.setFlowFlag("是");
+            user1.setPartyDate(partyDate1);
+        }
+        user1.setFlowFlag("否");
+        user1.setPartyIntroducer("无");
         String status = user.getStatus();
         user1.setStatus(status);
+        String national = user.getNational();
+        user1.setNational(national);
+        String nativePlace = user.getNativePlace();
+        user1.setNativePlace(nativePlace);
+        String telephone = user.getTelephone();
+        user1.setTelephone(telephone);
+        String education = user.getEducation();
+        user1.setEducation(education);
         this.userService.update(user1);
         System.out.println("---------"+user1);
         return "redirect:/user/userManagement";

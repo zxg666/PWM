@@ -27,4 +27,16 @@ public interface UserService {
     List<Map<String,Object>> selectLikeMap(String userName,String organization);
     //按MapID查找
     Map<String, Object> selectMapById(Integer ID);
+    //查全部党员
+    List<Users> selectByMember();
+    //查全部积极分子
+    List<Users> selectByActivist();
+    //按名字模糊查询党员
+    List<Users> selectLikeByMember(String userName);
+    //按名字模糊查询积极分子
+    List<Users> selectLikeByActivist(String userName);
+    //查找流动党员信息
+    List<Users> selectByFlow();
+    //模糊查询流动党员信息
+    List<Users> selectLikeByFlow(String userName);
 }

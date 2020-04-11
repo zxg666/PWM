@@ -40,7 +40,7 @@
                     <td>联系电话：</td>
                     <td colspan = "3" style="text-align: left"><input type="text" class="text" th:value="${organization.telephone}" name="telephone"></td>
                     <td>党组织成立时间</td>
-                    <td colspan = "3" style="text-align: left"><input type="text" class="text" th:text="${#dates.format(organization.entryTime, 'yyyy-MM-dd')}" name="entryTime"></td>
+                    <td colspan = "3" style="text-align: left"><input id="demo" type="text" class="text" th:value="${#dates.format(organization.entryTime, 'yyyy-MM-dd')}" name="entryTime"></td>
                 </tr>
                 </tbody>
             </table>

@@ -24,8 +24,26 @@ public class Users {
     private  String birthday;
     //img	varchar
     private String img;
+    //member_flag	varchar
+    private String memberFlag;
+    //activist_flag	varchar
+    private String activistFlag;
     //status	tinyint
     private  String status;
     //entry_time	date
     private Date entryTime;
+    //national	varchar
+    private String national;
+    //native_place	varchar
+    private String nativePlace;
+    //party_date	varchar
+    private String partyDate;
+    //party_introducer	varchar
+    private String partyIntroducer;
+    //telephone	varchar
+    private String telephone;
+    //education	varchar
+    private String education;
+    //flow_flag	varchar
+    private String flowFlag;
 }

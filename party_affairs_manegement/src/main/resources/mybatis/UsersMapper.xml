@@ -9,12 +9,16 @@
 		<result column="sex" property="sex" jdbcType="VARCHAR"/>
 		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
 		<result column="img" property="img" jdbcType="VARCHAR"/>
+		<result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+		<result column="education" property="education" jdbcType="VARCHAR"/>
+		<result column="national" property="national" jdbcType="VARCHAR"/>
+		<result column="native_place" property="nativePlace" jdbcType="VARCHAR"/>
 		<result column="status" property="status" jdbcType="VARCHAR"/>
 		<result column="entry_time" property="entryTime" jdbcType="DATE"/>
 	</resultMap>
 	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Users">
-		insert into tb_user(user_id,user_name,password,sex,birthday,img,status,entry_time)
-		values(#{userId},#{userName},#{password},#{sex},#{birthday},#{img},#{status},#{entryTime})
+		insert into tb_user(user_id,user_name,password,sex,birthday,img,national,native_place,status,telephone,education,entry_time,party_date,party_introducer,member_flag,activist_flag,flow_flag)
+		values(#{userId},#{userName},#{password},#{sex},#{birthday},#{img},#{national},#{nativePlace},#{status},#{telephone},#{education},#{entryTime},#{partyDate},#{partyIntroducer},#{memberFlag},#{activistFlag},#{flowFlag})
 	</insert>
 
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -32,7 +36,9 @@
 	</select>
 
 	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Users">
-		update tb_user set user_id=#{userId},user_name=#{userName},password=#{password},sex=#{sex},birthday=#{birthday},img=#{img},status=#{status}
+		update tb_user set user_id=#{userId},user_name=#{userName},password=#{password},sex=#{sex},birthday=#{birthday},img=#{img},
+						   national=#{national},native_place=#{nativePlace},telephone=#{telephone},education=#{education},
+						   party_introducer=#{partyIntroducer},member_flag=#{memberFlag},activist_flag=#{activistFlag},flow_flag=#{flowFlag},status=#{status}
 		where user_id=#{userId}
 	</update>
 	
@@ -54,6 +60,10 @@
 		    u.birthday AS "birthday",
 			u.sex AS "sex",
 			u.img AS "img",
+		    u.national AS "national",
+		    u.native_place AS "nativePlace",
+		    u.telephone AS "telephone",
+		    u.education AS "education",
 			u.status AS "status",
 			uro.organization AS "organization",
 			r.role AS "role"
@@ -73,6 +83,10 @@
 			u.birthday AS "birthday",
 			u.sex AS "sex",
 			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
 			u.status "status",
 			uro.organization AS "organization",
 			r.role AS "role"
@@ -94,6 +108,10 @@
 			u.birthday AS "birthday",
 			u.sex AS "sex",
 			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
 			u.status "status",
 			uro.organization AS "organization",
 			r.role AS "role"
@@ -103,6 +121,159 @@
 		left join tb_role r
 		on uro.role_id=r.role_id
 		where uro.id=#{ID}
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectByMember" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.party_date AS "partyDate",
+			u.party_introducer AS "partyIntroducer",
+		 	uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where member_flag='是'
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectByActivist" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+			u.party_date AS "partyDate",
+			u.party_introducer AS "partyIntroducer",
+			u.status AS "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where activist_flag='是'
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectLikeByMember" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.party_date AS "partyDate",
+			u.party_introducer AS "partyIntroducer",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where member_flag='是'
+		and u.user_name like concat('%', #{userName}, '%')
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectLikeByActivist" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+			u.party_date AS "partyDate",
+			u.party_introducer AS "partyIntroducer",
+			u.status AS "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where activist_flag='是'
+		and u.user_name like concat('%', #{userName}, '%')
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectByFlow" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+		    u.party_date AS "partyDate",
+		    u.party_introducer AS "partyIntroducer",
+			u.status AS "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where flow_flag='是'
+		ORDER BY u.user_id,uro.role_id
+	</select>
+	<select id="selectLikeByFlow" resultType="java.util.Map">
+		select
+			uro.id AS "ID",
+			u.user_id AS "userId",
+			u.user_name AS "userName",
+			u.password AS "password",
+			u.birthday AS "birthday",
+			u.sex AS "sex",
+			u.img AS "img",
+			u.national AS "national",
+			u.native_place AS "nativePlace",
+			u.telephone AS "telephone",
+			u.education AS "education",
+			u.party_date AS "partyDate",
+			u.party_introducer AS "partyIntroducer",
+			u.status AS "status",
+			uro.organization AS "organization",
+			r.role AS "role"
+		from tb_user u
+		left join tb_user_role_organization uro
+		on uro.user_id=u.user_id
+		left join tb_role r
+		on uro.role_id=r.role_id
+		where flow_flag='是'
+		and u.user_name like concat('%', #{userName}, '%')
 		ORDER BY u.user_id,uro.role_id
 	</select>
 </mapper>

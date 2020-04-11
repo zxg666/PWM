@@ -47,23 +47,20 @@
             $(".tree_left").css('height', height01 - 35+"px");
         }
     </script>
-    <title>党组织管理</title>
+    <title>党员业务</title>
 </head>
 <body onload="change()">
-<div class="title"><h2>党组织管理</h2></div>
+<div class="title"><h2>党员业务</h2></div>
 <div class="l_left" style="width: 100%">
     <div class="query">
-        <form action="/organization/organizationList">
+        <form action="/service/memberList">
             <div class="tabe_bot">
-                <div class="l_left"><label>党组织：</label><input type="text" placeholder="请输入姓名" id="organizationName" name="organizationName"></div>
-                <div class="l_left"><label>领导人：</label><input type="text" placeholder="请输入姓名" id="organizationLeader" name="organizationLeader"></div>
+                <div class="l_left"><label>申请人姓名：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
+                <div class="l_left"><label>申请标题：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
                 <button class="tabe_btn " type="submit">查询</button>
                 <div class="clear"></div>
             </div>
         </form>
-    </div>
-    <div class="table-operate ue-clear">
-        <a href="/page/organization_add" class="add">添加</a>
     </div>
     <div class="table-box">
         <table id="table" class="table_style"
@@ -71,34 +68,37 @@
             <thead>
             <tr>
                 <th data-checkbox="true" data-field="id">ID</th>
-                <th data-field="organizationId" data-sortable="true" data-align="center">党组织ID</th>
-                <th data-field="organizationName" data-sortable="true" data-align="center">党组织名称</th>
-                <th data-field="organizationLeader" data-sortable="true" data-align="center">党组织领导</th>
-                <th data-field="organizationInfo" data-sortable="true" data-align="center">党组织联系人</th>
-                <th data-field="parentId" data-sortable="true" data-align="center">上级组织ID</th>
-                <th data-field="telephone" data-align="center">联系电话</th>
-                <th data-field="entryTime"data-sortable="true"  data-align="center">党组织成立时间</th>
-                <th data-align="center">操作</th>
+                <th data-field="eopId" data-sortable="true" data-align="center">申请人编号</th>
+                <th data-sortable="true" data-field="eopName" data-align="center">申请人姓名</th>
+                <th data-field="sex" data-align="center" data-sortable="true">性别</th>
+                <th data-field="national" data-align="center" data-sortable="true">民族</th>
+                <th data-sortable="true" data-field="nativePlace" data-align="center">籍贯</th>
+                <th data-field="birthday" data-sortable="true"  data-align="center">出生日期</th>
+                <th data-field="post" data-align="center">职务</th>
+                <th data-field="education" data-align="center">学历</th>
+                <th data-field="title" data-sortable="true" data-align="center">申请标题</th>
+                <th data-field="content" data-sortable="true"  data-align="center">内容</th>
+                <th data-field="applicationDate" data-sortable="true"  data-align="center">申请时间</th>
+                <th data-field="opinion" data-align="center" data-sortable="true">意见</th>
+                <th data-field="telephone" data-align="center">电话</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="organization,organizationListStatus:${organizationList}">
-                <td th:text="${organization.organizationId}"></td>
-                <td th:text="${organization.organizationId}"></td>
-                <td th:text="${organization.organizationName}"></td>
-                <td th:text="${organization.organizationLeader}"></td>
-                <td th:text="${organization.organizationInfo}"></td>
-                <td th:text="${organization.parentId}"></td>
-                <td th:text="${organization.telephone}"></td>
-                <td th:text="${#dates.format(organization.entryTime, 'yyyy-MM-dd')}"></td>
-                <td>
-                    <a style="text-decoration:none;padding: 5px" th:href="'/organization/delete/'+${organization.organizationId}">
-                        <img src="/images/delico.png">
-                    </a>
-                    <a style="text-decoration:none;padding: 5px" th:href="'/page/organizationEdit/'+${organization.organizationId}">
-                        <img src="/images/edtico.png">
-                    </a>
-                </td>
+            <tr th:each="user,userListStatus:${applyList}">
+                <td th:text="${user.eopId}"></td>
+                <td th:text="${user.eopId}"></td>
+                <td th:text="${user.eopName}"></td>
+                <td th:text="${user.sex}"></td>
+                <td th:text="${user.national}"></td>
+                <td th:text="${user.nativePlace}"></td>
+                <td th:text="${user.birthday}"></td>
+                <td th:text="${user.post}"></td>
+                <td th:text="${user.education}"></td>
+                <td th:text="${user.title}"></td>
+                <td th:text="${user.content}"></td>
+                <td th:text="${user.applicationDate}"></td>
+                <td th:text="${user.opinion}"></td>
+                <td th:text="${user.telephone}"></td>
             </tr>
             </tbody>
         </table>
