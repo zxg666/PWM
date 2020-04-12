@@ -30,6 +30,8 @@ public class PageController {
     private RoleService roleService;
     @Autowired
     private FunctionService functionService;
+    @Autowired
+    private ApplyService applyService;
 
      //跳转到首页
     @RequestMapping("index")
@@ -158,6 +160,18 @@ public class PageController {
         model.addAttribute("organization",organization);
         System.out.println("organization:"+organization);
         return "basic/organization/organization_edit";
+    }
+
+    //跳转到入党申请审批页
+    @RequestMapping("applyEdit/{eopId}")
+    public String applyEdit(@PathVariable("eopId") Integer eopId,Model model){
+        Apply apply = this.applyService.selectById(eopId);
+        model.addAttribute("apply",apply);
+        System.out.println("apply:"+apply);
+        List<Users> usersList = this.userService.selectAll();
+        System.out.println("usersList"+usersList);
+        model.addAttribute("usersList",usersList);
+        return "service/member/apply_edit";
     }
 
     //跳转到成功页面

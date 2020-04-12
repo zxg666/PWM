@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>文件审批</title>
+    <link href="/css/tail.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+        function change() {
+            var height01 = $(window).height();
+            $(".top").css('height', height01 - 35+"px");
+        }
+    </script>
+</head>
+
+<body style="border-radius: 8px" onload="change()">
+<div class="top">
+    <form id="form_demo" action="/service/applyEdit">
+    <div>
+        <div class="top_out">
+            <table class="table" >
+                <tbody>
+                <tr>
+                    <td style="border-top: none">文件标题：</td>
+                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text" th:value="${apply.title}"></td>
+                </tr>
+                <tr>
+                    <td>会签人：</td>
+                    <td  style="text-align: left"><select name="telephone1">
+                        <option th:each="usersList,usersListStatus:${usersList}" th:text="${usersList.userName}"></option>
+                    </select></td>
+                    <td>抄送人：</td>
+                    <td  style="text-align: left"><select name="telephone">
+                        <option th:each="usersList,usersListStatus:${usersList}" th:text="${usersList.userName}"></option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td style="line-height: 260px">申请内容：</td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" style="width: 100%;height: 260px" th:text="${apply.content}"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="line-height: 50px">审批意见：</td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" name="opinion" style="width: 100%;height: 50px"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bot_btn">
+        <input class="btn" type="submit" value="保存"/>
+        <button class="btn btn1"><a href="/service/memberManagement" target="right">返回</a></button>
+    </div>
+</form>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/utf8-php/ueditor.config.js"></script>
+<script src="/js/utf8-php/ueditor.all.min.js"></script>
+<script src="/js/jquery-validation-1.14.0/dist/jquery.validate.min.js" charset="utf-8"></script>
+<script src="/js/jquery-validation-1.14.0/dist/localization/messages_zh.js" charset="utf-8"></script>
+</html>

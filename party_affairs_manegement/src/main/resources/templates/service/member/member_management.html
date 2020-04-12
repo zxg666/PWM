@@ -55,8 +55,8 @@
     <div class="query">
         <form action="/service/memberList">
             <div class="tabe_bot">
-                <div class="l_left"><label>申请人姓名：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
-                <div class="l_left"><label>申请标题：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
+                <div class="l_left"><label>申请人：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
+                <div class="l_left"><label>标题：</label><input type="text" placeholder="请输入标题" name="title"></div>
                 <button class="tabe_btn " type="submit">查询</button>
                 <div class="clear"></div>
             </div>
@@ -77,10 +77,10 @@
                 <th data-field="post" data-align="center">职务</th>
                 <th data-field="education" data-align="center">学历</th>
                 <th data-field="title" data-sortable="true" data-align="center">申请标题</th>
-                <th data-field="content" data-sortable="true"  data-align="center">内容</th>
                 <th data-field="applicationDate" data-sortable="true"  data-align="center">申请时间</th>
                 <th data-field="opinion" data-align="center" data-sortable="true">意见</th>
                 <th data-field="telephone" data-align="center">电话</th>
+                <th data-align="center">审批</th>
             </tr>
             </thead>
             <tbody>
@@ -95,10 +95,14 @@
                 <td th:text="${user.post}"></td>
                 <td th:text="${user.education}"></td>
                 <td th:text="${user.title}"></td>
-                <td th:text="${user.content}"></td>
-                <td th:text="${user.applicationDate}"></td>
+                <td th:text="${#dates.format(user.applicationDate, 'yyyy-MM-dd')}"></td>
                 <td th:text="${user.opinion}"></td>
                 <td th:text="${user.telephone}"></td>
+                <td>
+                    <a style="text-decoration:none;padding: 5px" th:href="'/page/applyEdit/'+${user.eopId}">
+                        <img src="/images/edtico.png">
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

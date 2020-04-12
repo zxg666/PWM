@@ -31,7 +31,7 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=true)
     public List<Apply> selectByNameAndTitle(String eopName, String title) {
-        return this.selectByNameAndTitle(eopName,title);
+        return this.applyMapper.selectByNameAndTitle(eopName,title);
     }
 
     @Override

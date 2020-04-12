@@ -249,10 +249,10 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.js"></script>
-<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-table.js"></script>
+<script src="/js/bootstrap-table-zh-CN.min.js"></script>
 <script>
     $(function () {
         $('#table').bootstrapTable({
@@ -275,7 +275,7 @@
                     valign: 'middle'
                 },
                 {
-                    title: '完成日期',
+                    title: '发送日期',
                     field: 'sex',
                     align: 'center',
                     valign: 'middle'
@@ -328,7 +328,7 @@ $(".duty").find("tbody").find("tr:even").css("backgroundColor","#eff6fa");
             area: ['80%', '75%'],
             shadeClose: true,
             closeBtn: 2,
-            content: 'calendar.html'
+            content: '/calendar.html'
             //iframe的url
         });
     }

@@ -47,26 +47,19 @@
             $(".tree_left").css('height', height01 - 35+"px");
         }
     </script>
-    <title>用户管理</title>
+    <title>流动党员业务</title>
 </head>
 <body onload="change()">
-<div class="title"><h2>用户管理</h2></div>
+<div class="title"><h2>流动党员业务</h2></div>
 <div class="l_left" style="width: 100%">
 <div class="query">
-    <form action="/user/userList">
+    <form action="/service/flowList">
     <div class="tabe_bot">
-        <div class="l_left"><label>用户名：</label><input type="text" placeholder="请输入姓名" id="userName" name="userName"></div>
-        <div class="l_left"><label>角色：</label><select id="organization" name="organization">
-            <option th:each="organizationList,organizationListStatus:${organizationList}" th:text="${organizationList.organizationName}"></option>
-        </select></div>
+        <div class="l_left"><label>用户名：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
         <button class="tabe_btn " type="submit">查询</button>
         <div class="clear"></div>
     </div>
     </form>
-</div>
-<div class="table-operate ue-clear">
-    <a href="/page/user_add" class="add">添加</a>
-    <a href="/user/delete" class="del" onclick="del()">清空</a>
 </div>
 <div class="table-box">
     <table id="table" class="table_style"
@@ -74,15 +67,18 @@
         <thead>
         <tr>
             <th data-checkbox="true" data-field="id">ID</th>
-            <th data-field="userId" data-sortable="true" data-align="center">用户ID</th>
-            <th data-sortable="true" data-field="userName" data-align="center">用户名</th>
-            <th data-field="password" data-align="center">密码</th>
-            <th data-field="sex" data-align="center">性别</th>
-            <th data-field="role" data-align="center">角色</th>
-            <th data-field="organization" data-align="center">组织</th>
-            <th data-field="img" data-align="center">头像</th>
-            <th data-field="status" data-align="center">状态</th>
-            <th data-align="center">操作</th>
+            <th data-field="userId" data-sortable="true" data-align="center">党员编号</th>
+            <th data-sortable="true" data-field="userName" data-align="center">党员姓名</th>
+            <th data-field="sex" data-align="center" data-sortable="true">性别</th>
+            <th data-field="national" data-align="center" data-sortable="true">民族</th>
+            <th data-sortable="true" data-field="nativePlace" data-align="center">籍贯</th>
+            <th data-field="birthday" data-sortable="true"  data-align="center">出生日期</th>
+            <th data-field="role" data-align="center">职务</th>
+            <th data-field="education" data-align="center">学历</th>
+            <th data-field="partyDate" data-sortable="true"  data-align="center">变动时间</th>
+            <th data-field="organization" data-sortable="true" data-align="center">所在党组织组织</th>
+            <th data-field="partyIntroducer" data-align="center" data-sortable="true">入党介绍人</th>
+            <th data-field="telephone" data-align="center">电话</th>
         </tr>
         </thead>
         <tbody>
@@ -90,20 +86,16 @@
             <td th:text="${user.ID}"></td>
             <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
-            <td th:text="${user.password}"></td>
             <td th:text="${user.sex}"></td>
+            <td th:text="${user.national}"></td>
+            <td th:text="${user.nativePlace}"></td>
+            <td th:text="${user.birthday}"></td>
             <td th:text="${user.role}"></td>
+            <td th:text="${user.education}"></td>
+            <td th:text="${user.partyDate}"></td>
             <td th:text="${user.organization}"></td>
-            <td><img style="margin:0;padding:0;height: 36px;width: 30px" th:src="${user.img}"></td>
-            <td th:text="${user.status}"></td>
-            <td>
-                <a style="text-decoration:none;padding: 5px" th:href="'/user/delete/'+${user.ID}">
-                    <img src="/images/delico.png">
-                </a>
-                <a style="text-decoration:none;padding: 5px" th:href="'/page/userEdit/'+${user.ID}">
-                    <img src="/images/edtico.png">
-                </a>
-            </td>
+            <td th:text="${user.partyIntroducer}"></td>
+            <td th:text="${user.telephone}"></td>
         </tr>
         </tbody>
     </table>

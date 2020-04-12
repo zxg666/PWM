@@ -1,12 +1,10 @@
 package com.pam.party_affairs_manegement.service.impl;
 
-import com.pam.party_affairs_manegement.domain.Function;
-import com.pam.party_affairs_manegement.domain.Role;
-import com.pam.party_affairs_manegement.domain.RoleFunction;
-import com.pam.party_affairs_manegement.domain.UserRoleOrganization;
+import com.pam.party_affairs_manegement.domain.*;
 import com.pam.party_affairs_manegement.mapper.RoleFunctionMapper;
 import com.pam.party_affairs_manegement.mapper.UserRoleOrganizationMapper;
 import com.pam.party_affairs_manegement.service.UserRoleOrganizationService;
+import com.pam.party_affairs_manegement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +28,11 @@ public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationServ
     @Override
     public UserRoleOrganization selectById(Integer id) {
         return this.userRoleOrganizationMapper.selectById(id);
+    }
+
+    @Override
+    public List<UserRoleOrganization> selectByRole(Integer roleId) {
+        return this.userRoleOrganizationMapper.selectByRole(roleId);
     }
 
     @Override

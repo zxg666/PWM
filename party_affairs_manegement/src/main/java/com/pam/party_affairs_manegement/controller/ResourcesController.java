@@ -12,81 +12,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service")
-public class ServiceController {
+@RequestMapping("/resources")
+public class ResourcesController {
     @Autowired
     private ApplyService applyService;
     @Autowired
     private UserService userService;
 
-    //党员申请名单
-    @RequestMapping("memberManagement")
+    //历史信息
+    @RequestMapping("history")
     public String memberManagement(Model model){
         List<Apply> applyList = this.applyService.selectAll();
         model.addAttribute("applyList",applyList);
         System.out.println("applyList:"+applyList);
-        return "service/member/member_management";
+        return "resources/history/history";
     }
 
-    //模糊查询党员申请名单
-    @RequestMapping("memberList")
+    //证明信
+    @RequestMapping("certificate")
     public String memberList(Model model,String eopName,String title){
         List<Apply> applyList = this.applyService.selectByNameAndTitle(eopName,title);
         model.addAttribute("applyList",applyList);
         System.out.println("applyList:"+applyList);
-        return "service/member/member_management";
+        return "resources/certificate/certificate";
     }
 
-    //查找全部积极分子
-    @RequestMapping("activistManagement")
+    //介绍信
+    @RequestMapping("letter")
     public String activistManagement(Model model){
         List<Users> userList = this.userService.selectByActivist();
         model.addAttribute("userList",userList);
         System.out.println("userList:"+userList);
-        return "service/activist/activist_management";
+        return "resources/letter/letter";
     }
 
-    //模糊查找全部积极分子
-    @RequestMapping("activistList")
+    //警示信息
+    @RequestMapping("warning")
     public String activistList(Model model,String userName){
         List<Users> userList = this.userService.selectLikeByActivist(userName);
         model.addAttribute("userList",userList);
         System.out.println("userList:"+userList);
-        return "service/activist/activist_management";
+        return "resources/warning/warning";
     }
 
-    //查找全部流动党员
-    @RequestMapping("flowManagement")
+    //新闻活动信息
+    @RequestMapping("news")
     public String flowManagement(Model model){
         List<Users> userList = this.userService.selectByFlow();
         model.addAttribute("userList",userList);
         System.out.println("userList:"+userList);
-        return "service/flow/flow_management";
-    }
-
-    //模糊查找流动党员
-    @RequestMapping("flowList")
-    public String flowList(Model model,String userName){
-        List<Users> userList = this.userService.selectLikeByFlow(userName);
-        model.addAttribute("userList",userList);
-        System.out.println("userList:"+userList);
-        return "service/flow/flow_management";
-    }
-
-
-    //入党申请人审批
-    @RequestMapping("applyEdit")
-    public String applyEdit(String telephone,String telephone1){
-
-        return "redirect:/service/memberManagement";
-    }
-
-    //领导成员管理
-    @RequestMapping("leaderManagement")
-    public String leaderManagement(Model model){
-        List<Users> userList = this.userService.selectByMember();
-        model.addAttribute("userList",userList);
-        System.out.println("userList:"+userList);
-        return "service/leader/leader_Management";
+        return "resources/news/news";
     }
 }

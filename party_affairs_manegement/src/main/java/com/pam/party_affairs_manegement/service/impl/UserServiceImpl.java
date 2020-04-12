@@ -1,7 +1,9 @@
 package com.pam.party_affairs_manegement.service.impl;
 
+import com.pam.party_affairs_manegement.domain.UserRoleOrganization;
 import com.pam.party_affairs_manegement.domain.Users;
 import com.pam.party_affairs_manegement.mapper.UserMapper;
+import com.pam.party_affairs_manegement.mapper.UserRoleOrganizationMapper;
 import com.pam.party_affairs_manegement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserRoleOrganizationMapper userRoleOrganizationMapper;
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,readOnly=false)
@@ -30,8 +34,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation=Propagation.REQUIRED,readOnly=true)
+    //按角色查所有用户
     public List<Users> selectAll() {
-        return this.userMapper.selectAll();
+        List<Users> usersList = this.userMapper.selectAll();
+        for (Users user:usersList) {
+            List<UserRoleOrganization> userRoleOrganizationList = this.userRoleOrganizationMapper.selectByUser(user.getUserId());
+            user.setUserRoleOrganizationList(userRoleOrganizationList);
+        }
+        return usersList;
     }
 
     @Override

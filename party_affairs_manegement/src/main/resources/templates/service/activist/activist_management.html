@@ -47,16 +47,15 @@
             $(".tree_left").css('height', height01 - 35+"px");
         }
     </script>
-    <title>入党申请人信息</title>
+    <title>积极分子业务</title>
 </head>
 <body onload="change()">
-<div class="title"><h2>入党申请人信息</h2></div>
+<div class="title"><h2>积极分子业务</h2></div>
 <div class="l_left" style="width: 100%">
     <div class="query">
-        <form action="/BI/applyList">
+        <form action="/service/activistList">
             <div class="tabe_bot">
-                <div class="l_left"><label>申请人：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
-                <div class="l_left"><label>标题：</label><input type="text" placeholder="请输入标题" name="title"></div>
+                <div class="l_left"><label>用户名：</label><input type="text" placeholder="请输入姓名" name="userName"></div>
                 <button class="tabe_btn " type="submit">查询</button>
                 <div class="clear"></div>
             </div>
@@ -68,33 +67,35 @@
             <thead>
             <tr>
                 <th data-checkbox="true" data-field="id">ID</th>
-                <th data-field="eopId" data-sortable="true" data-align="center" style="margin:0;width: 5px">申请人编号</th>
-                <th data-sortable="true" data-field="eopName" data-align="center">申请人姓名</th>
+                <th data-field="userId" data-sortable="true" data-align="center">积极分子编号</th>
+                <th data-sortable="true" data-field="userName" data-align="center">积极分子姓名</th>
                 <th data-field="sex" data-align="center" data-sortable="true">性别</th>
                 <th data-field="national" data-align="center" data-sortable="true">民族</th>
                 <th data-sortable="true" data-field="nativePlace" data-align="center">籍贯</th>
                 <th data-field="birthday" data-sortable="true"  data-align="center">出生日期</th>
-                <th data-field="post" data-align="center">职务</th>
+                <th data-field="role" data-align="center">职务</th>
                 <th data-field="education" data-align="center">学历</th>
-                <th data-field="applicationDate" data-sortable="true"  data-align="center">申请时间</th>
-                <th data-field="opinion" data-align="center" data-sortable="true">意见</th>
+                <th data-field="organization" data-sortable="true" data-align="center">机构名称</th>
+                <th data-field="partyDate" data-sortable="true"  data-align="center">培养时间</th>
+                <th data-field="partyIntroducer" data-align="center" data-sortable="true">培养人</th>
                 <th data-field="telephone" data-align="center">电话</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user,userListStatus:${applyList}">
-                <td data-align="center" data-valign="middle" th:text="${user.eopId}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.eopId}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.eopName}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.sex}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.national}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.nativePlace}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.birthday}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.post}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.education}"></td>
-                <td data-align="center" data-valign="middle" th:text="${#dates.format(user.applicationDate, 'yyyy-MM-dd')}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.opinion}"></td>
-                <td data-align="center" data-valign="middle" th:text="${user.telephone}"></td>
+            <tr th:each="user,userListStatus:${userList}">
+                <td th:text="${user.ID}"></td>
+                <td th:text="${user.userId}"></td>
+                <td th:text="${user.userName}"></td>
+                <td th:text="${user.sex}"></td>
+                <td th:text="${user.national}"></td>
+                <td th:text="${user.nativePlace}"></td>
+                <td th:text="${user.birthday}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.education}"></td>
+                <td th:text="${user.partyDate}"></td>
+                <td th:text="${user.organization}"></td>
+                <td th:text="${user.partyIntroducer}"></td>
+                <td th:text="${user.telephone}"></td>
             </tr>
             </tbody>
         </table>

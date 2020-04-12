@@ -17,6 +17,10 @@
         select * from tb_user_role_organization
         where user_id=#{userId} and organization=#{organization} order by role_id asc limit 0,1
     </select>
+    <select id="selectByRole" resultMap="BaseResultMap">
+        select * from tb_user_role_organization
+        where role_id=#{role_id}
+    </select>
     <select id="selectById" resultMap="BaseResultMap">
         select * from tb_user_role_organization
         where id=#{id}

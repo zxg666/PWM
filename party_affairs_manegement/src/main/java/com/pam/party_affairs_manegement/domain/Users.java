@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -46,4 +47,6 @@ public class Users {
     private String education;
     //flow_flag	varchar
     private String flowFlag;
+    //组装用户
+    List<UserRoleOrganization> userRoleOrganizationList;
 }

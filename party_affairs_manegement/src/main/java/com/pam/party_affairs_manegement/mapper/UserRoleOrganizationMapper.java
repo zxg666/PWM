@@ -13,6 +13,8 @@ public interface UserRoleOrganizationMapper {
     UserRoleOrganization selectByOrganization(Integer userId,String organization);
     //根据ID查找
     UserRoleOrganization selectById(Integer id);
+    //根据角色查找用户
+    List<UserRoleOrganization> selectByRole(Integer roleId);
     //增加记录
     int insert(UserRoleOrganization userRoleOrganization);
     //更新记录
