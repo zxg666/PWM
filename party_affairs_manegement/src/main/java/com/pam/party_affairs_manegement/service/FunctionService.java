@@ -8,6 +8,9 @@ public interface FunctionService {
     //查全部
     List<Function> selectALL();
 
+    //按角色名字查询
+    List<Function> selectByName(String functionName);
+
     //按ID查找功能
     Function selectById(Integer functionId);
 
@@ -17,18 +20,21 @@ public interface FunctionService {
     //按访问量展示功能
     List<Function> selectAllByVisit(Integer parentId);
 
-    //按查级别功能
+    //查一级功能
     List<Function> selectByLevel();
 
     //增加功能
-    int insert(Function function);
+    Integer insert(Function function);
 
     //修改功能
-    int update(Function function);
+    Integer update(Function function);
 
     //删除功能
-    int delete(Integer functionId);
+    Integer delete(Integer functionId);
 
     //按父ID查找功能
     List<Function> selectByParent(Integer parentId);
+
+    //查找的最大的功能ID，用于新增功能时给角色赋权
+    Function selectMaxId();
 }

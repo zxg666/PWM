@@ -19,6 +19,14 @@ public interface UserRoleOrganizationMapper {
     int insert(UserRoleOrganization userRoleOrganization);
     //更新记录
     int update(UserRoleOrganization userRoleOrganization);
+    //根据用户更新记录
+    int updateByUser(UserRoleOrganization userRoleOrganization,Integer userId);
+    //根据组织更新记录
+    int updateByOrganization(UserRoleOrganization userRoleOrganization,String organization);
     //删除记录
     int delete(Integer id);
+    //根据角色删除
+    int deleteByRole(Integer roleId);
+    //根据用户删除
+    int deleteByUser(Integer userId);
 }

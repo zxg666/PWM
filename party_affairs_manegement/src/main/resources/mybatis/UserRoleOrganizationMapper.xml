@@ -30,11 +30,27 @@
         values(#{userId},#{roleId},#{organization},#{entryTime})
     </insert>
     <update id="update" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
-        update tb_user_role_organization set id=#{id},user_id=#{userId},role_id=#{roleId},organization=#{organization}
+        update tb_user_role_organization set user_id=#{userId},role_id=#{roleId},organization=#{organization}
         where id=#{id}
+    </update>
+    <update id="updateByUser" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        update tb_user_role_organization set user_id=#{userId},role_id=#{roleId},organization=#{organization}
+        where user_id=#{userId}
+    </update>
+    <update id="updateByOrganization" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        update tb_user_role_organization set organization=#{organization}
+        where organization=#{organization}
     </update>
     <delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
         delete from tb_user_role_organization
         where id=#{id}
+    </delete>
+    <delete id="deleteByRole" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        delete from tb_user_role_organization
+        where role_id=#{role_id}
+    </delete>
+    <delete id="deleteByUser" parameterType="com.pam.party_affairs_manegement.domain.UserRoleOrganization">
+        delete from tb_user_role_organization
+        where user_id=#{userId}
     </delete>
 </mapper>

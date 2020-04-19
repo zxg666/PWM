@@ -14,5 +14,9 @@ public interface RoleFunctionService {
     //更新记录
     int update(RoleFunction roleFunction);
     //删除记录
-    int delete(RoleFunction roleFunction);
+    int delete(Integer id);
+    //根据角色删除记录
+    int deleteByRole(Integer role);
+    //根据功能删除记录
+    int deleteByFunction(Integer function);
 }

@@ -27,4 +27,12 @@
         delete from tb_role_function
         where id=#{id}
     </delete>
+    <delete id="deleteByFunction" parameterType="com.pam.party_affairs_manegement.domain.RoleFunction">
+        delete from tb_role_function
+        where function_id=#{functionId}
+    </delete>
+    <delete id="deleteByRole" parameterType="com.pam.party_affairs_manegement.domain.RoleFunction">
+        delete from tb_role_function
+        where role_id=#{roleId}
+    </delete>
 </mapper>

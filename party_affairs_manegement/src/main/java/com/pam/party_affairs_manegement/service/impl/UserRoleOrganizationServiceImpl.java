@@ -46,7 +46,27 @@ public class UserRoleOrganizationServiceImpl implements UserRoleOrganizationServ
     }
 
     @Override
+    public int updateByUser(UserRoleOrganization userRoleOrganization, Integer userId) {
+        return this.userRoleOrganizationMapper.updateByUser(userRoleOrganization,userId);
+    }
+
+    @Override
+    public int updateByOrganization(UserRoleOrganization userRoleOrganization, String organization) {
+        return this.userRoleOrganizationMapper.updateByOrganization(userRoleOrganization,organization);
+    }
+
+    @Override
     public int delete(Integer id) {
         return this.userRoleOrganizationMapper.delete(id);
+    }
+
+    @Override
+    public int deleteByRole(Integer roleId) {
+        return this.userRoleOrganizationMapper.deleteByRole(roleId);
+    }
+
+    @Override
+    public int deleteByUser(Integer userId) {
+        return this.userRoleOrganizationMapper.deleteByUser(userId);
     }
 }

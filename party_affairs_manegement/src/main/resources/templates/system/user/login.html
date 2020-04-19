@@ -10,18 +10,17 @@
     $(function() {
         $(".button").click(function () {
             var lock = true;
-            /* //生成的验证码
+             //生成的验证码
              var checkCode = $("#checkCode").html();
              //输入的验证码
              var valiDate = $("#valiDate").val();
              if (valiDate.length == 0) {
                  alert("请输入验证码！");
                  lock = false;
-             }if (valiDate.toUpperCase() != checkCode.toUpperCase()) {
+             }else if (valiDate.toUpperCase() != checkCode.toUpperCase()) {
                  alert("验证码输入有误！");
                  lock = false;
              }
-*/
 
             if(lock) {
                 //获取用户ID

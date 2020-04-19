@@ -55,10 +55,10 @@ public class FunctionController {
     }
 
 
-    //按用户名和角色查询用户
+    //按角色名称查询
     @RequestMapping("functionList")
     public String userList(Model model,String functionName){
-        List<Function> functionList = this.functionService.selectALL();
+        List<Function> functionList = this.functionService.selectByName(functionName);
         model.addAttribute("functionList",functionList);
         System.out.println("functionList:"+functionList);
         return "system/function/function_management";
@@ -85,6 +85,28 @@ public class FunctionController {
             function2.setTarget(target);
             this.functionService.insert(function2);
             System.out.println(function2);
+            //是一级功能的话默认把新增的功能付给的党支部书记、党支部副书记、党支部纪律检查委员
+            if (parentId == null){
+                //当前系统中最大的功能ID
+                Function function3 = this.functionService.selectMaxId();
+                Integer functionId = function3.getFunctionId();
+                System.out.println("当前系统中最大的功能ID:"+functionId);
+                //党支部书记
+                RoleFunction roleFunction = new RoleFunction();
+                roleFunction.setRoleId(1);
+                roleFunction.setFunctionId(functionId);
+                this.roleFunctionService.insert(roleFunction);
+                //党支部副书记
+                RoleFunction roleFunction1 = new RoleFunction();
+                roleFunction1.setRoleId(2);
+                roleFunction1.setFunctionId(functionId);
+                this.roleFunctionService.insert(roleFunction1);
+                //党支部纪律检查委员
+                RoleFunction roleFunction2 = new RoleFunction();
+                roleFunction2.setRoleId(5);
+                roleFunction2.setFunctionId(functionId);
+                this.roleFunctionService.insert(roleFunction2);
+            }
             return "redirect:/function/functionManagement";
         }else{
             return "system/function/add";
@@ -121,6 +143,7 @@ public class FunctionController {
         Function function = this.functionService.selectById(functionId);
         System.out.println("function"+function);
         this.functionService.delete(functionId);
+        this.roleFunctionService.deleteByFunction(functionId);
         return "redirect:/function/functionManagement";
     }
 

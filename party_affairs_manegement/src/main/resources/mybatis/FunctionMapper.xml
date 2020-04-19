@@ -24,16 +24,19 @@
     <select id="selectALL" resultMap="BaseResultMap">
         select * from tb_function
     </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from tb_function where function_name like concat('%',#{functionName},'%')
+    </select>
     <select id="selectAllByVisit" resultMap="BaseResultMap">
-        select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,3
+        select * from tb_function where 1=1 and parent_id=#{parentId} and child is null order by visit desc limit 0,2
     </select>
     <select id="selectByLevel" resultMap="BaseResultMap">
         select * from tb_function
         where level=1
     </select>
     <insert id="insert" parameterType="com.pam.party_affairs_manegement.domain.Function">
-        insert into tb_function(function_name,level,parent_id,permission,child,target)
-        values(#{functionName},#{level},#{parentId},#{permission},#{child},#{target})
+        insert into tb_function(function_name,level,parent_id,permission,child,target,status)
+        values(#{functionName},#{level},#{parentId},#{permission},#{child},#{target},#{status})
     </insert>
     <update id="update" parameterType="com.pam.party_affairs_manegement.domain.Function">
         update tb_function set function_name=#{functionName},level=#{level},parent_id=#{parentId},
@@ -47,5 +50,9 @@
     <select id="selectByParent" resultMap="BaseResultMap">
         select * from tb_function
         where parent_id=#{parentId}
+    </select>
+    <select id="selectMaxId" resultMap="BaseResultMap">
+        select * from tb_function
+        where function_id = (select max(f.function_id) from tb_function f)
     </select>
 </mapper>

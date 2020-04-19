@@ -72,8 +72,13 @@ public class PartyAffairsManegementApplicationTests {
     }
 
     @Test
+    public void selectByfunctionName(){
+        System.out.println(this.functionMapper.selectByName("资源管理"));
+    }
+
+    @Test
     public void selectByLevel(){
-        List<Function> functionList = this.functionMapper.selectByLevel();
+        List<Function> functionList = this.functionService.selectByLevel();
         for (Function functions:functionList
         ) {
             System.out.println(functions);
@@ -88,6 +93,10 @@ public class PartyAffairsManegementApplicationTests {
         }
     }
 
+    @Test
+    public void selectMaxId(){
+        System.out.println("最大ID:"+this.functionMapper.selectMaxId());
+    }
 
     @Autowired
     private UserRoleOrganizationService userRoleOrganizationService;
@@ -132,6 +141,10 @@ public class PartyAffairsManegementApplicationTests {
     @Test
     public void deleteByUser(){
         this.userRoleOrganizationService.delete(1139307);
+    }
+    @Test
+    public void deleteByRole(){
+        this.userRoleOrganizationService.delete(30);
     }
 
     @Autowired
@@ -224,6 +237,15 @@ public class PartyAffairsManegementApplicationTests {
         ) {
             System.out.println(roleFunction);
         }
+    }
+
+    @Test
+    public void deleteByRole1(){
+        this.roleFunctionService.deleteByRole(7);
+    }
+    @Test
+    public void deleteByFunction(){
+        this.roleFunctionService.deleteByFunction(7);
     }
 
     @Autowired
