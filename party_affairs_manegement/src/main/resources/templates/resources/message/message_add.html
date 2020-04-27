@@ -1,0 +1,192 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消息发送</title>
+    <link href="/css/tail.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+        function change() {
+            var height01 = $(window).height();
+            $(".top").css('height', height01 - 35+"px");
+        }
+    </script>
+</head>
+<body style="border-radius: 8px" onload="change(),init()">
+<form id="form_demo" >
+<div class="top">
+    <div>
+        <div class="top_out">
+            <table class="table" >
+                <tbody>
+                <tr>
+                    <td style="border-top: none" >资源标题：<i class="i_start"></i></td>
+                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text"  name ="title" minlength="2"  required id="tit"></td>
+                </tr>
+                <tr>
+                    <td>推送对象：<i class="i_start"></i></td>
+                   <td colspan="6">全部推送：<select style="width: 40%" id="part" name="sendObject">
+                       <option>0</option>
+                   </select> 按人员推送：<select style="width: 40%" id="person" name="sendObject">
+                       <option>选择人员</option>
+                       <option th:each="usersList,usersListStatus:${usersList}" th:text="${usersList.userName}"></option>
+                   </select></td>
+                </tr>
+                <tr>
+                    <td>是否发布任务：</td>
+                    <td  style="text-align: left"><select name="taskFlag">
+                        <option>是</option>
+                        <option>否</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td style="line-height: 240px">资源内容：</td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" name="content" style="width: 100%;height: 240px"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bot_btn">
+        <input class="btn" type="submit" value="发送"/>
+        <button class="btn btn1"><a href="/resources/newsManagement" target="right">返回</a></button>
+    </div>
+</div>
+</form>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script >
+    $.validator.setDefaults({
+        submitHandler: function() {
+            alert("修改成功");
+        }
+    });
+    $().ready(function() {
+        $("#form_demo").validate();
+    });
+</script>
+<script src="js/date/js/laydate.js"></script>
+<script>
+    var PROJECTID, TASKTYPE, TASKPHASE,  PERSONID
+    !function () {
+        laydate.skin('danlan');//切换皮肤，请查看skins下面皮肤库
+        laydate({ elem: '#demo' });//绑定元素
+        laydate({ elem: '#demo1' });
+        laydate({ elem: '#demo2' });//绑定元素
+    }();
+    function init() {
+        if (parent.getCurrentID() != "") {
+            $.ajax({
+                url: '../TaskRecord/SearchTaskById?taskId=' + parent.getCurrentID(),
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    var data = result.data;
+                    if (data) {
+                        PROJECTID = data.PROJECTID
+                        PERSONID =data.PERSONID
+                        TASKPHASE = data.TASKPHASE;
+                        TASKTYPE = data.TASKTYPE;
+                        $("#tit").val(data.PROJECTNAME);
+                        $("#part").val(data.TASKPHASENAME);
+                        $("#person").val(data.STATE);
+
+                        $("#demo").val(getFormatTime(data.STARTTIME.substring(6,19)));
+                        $("#demo01").val(getFormatTime(data.STARTTIME.substring(6,19)));
+                        $("#sent").val(data.NOTE);
+
+                        $("#editor").val(data.NOTE);
+
+
+
+                    }
+                    else {
+                        alert("获取失败！");
+                    }
+                },
+                error: function (err) {
+                }
+            })
+
+
+        }
+        function Save() {
+            $.ajax({
+                type: "POST",
+                url: "../TaskRecord/UpdateTask",
+                data: {
+                    TASKID: parent.getCurrentID(),
+                    PROJECTID: PROJECTID,
+                    STATE: $("#name").val(),
+                    TASKPHASE: $("#tit").val(),
+                    TASKPHASE: $("#part").val(),
+                    STARTTIME: $("#demo").val(),
+                    STARTTIME: $("#demo01").val(),
+                    TASKTYPE: $("#person").val(),
+                    TASKTYPE: $("#sent").val(),
+                    NOTE: $("#editor").val(),
+
+
+
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result.data) {
+                        alert("保存成功！！！");
+                        parent.getNoticeTableData();
+                        TaskCancel();
+                    } else {
+                        alert("保存失败！！！")
+                    }
+                }
+            })
+        }
+        function TaskCancel() {
+            var index = parent.layer.getFrameIndex(window.name)
+            parent.layer.close(index);
+        }
+        //初始化部门下拉菜单
+//    function getPHASE() {
+//        $.ajax({
+//            url: '../Common/GetPhaseList',
+//            type: 'GET',
+//            dataType: 'json',
+//            success: function (data) {
+//                var PHASEValue = data.data;
+//                if (PHASEValue.length > 0) {
+//                    $("#part").html("");
+//                    for (var i = 0; i < PHASEValue.length; i++) {
+//                        if (TASKPHASE == PHASEValue[i].ID) {
+//                            var html = "<Option value = '" + PHASEValue[i].ID + "'  selected = 'true'>" + PHASEValue[i].NAME + "</Option>";
+//                        } else {
+//                            var html = "<Option value = '" + PHASEValue[i].ID + "'>" + PHASEValue[i].NAME + "</Option>";
+//                        };
+//                        $("#part").append(html);
+//                    }
+//                }
+//
+//
+//            },
+//            error: function (err) {
+//            }
+//
+//        })
+//    }
+
+
+        //时间格式化函数
+        function getFormatTime(time) {
+            var time = new Date(parseInt(time));
+            var y = time.getFullYear();
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            var h = time.getHours();
+            var mm = time.getMinutes();
+            var s = time.getSeconds();
+            return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+        }
+        function add0(m) { return m < 10 ? '0' + m : m }
+</script>
+
+</html>

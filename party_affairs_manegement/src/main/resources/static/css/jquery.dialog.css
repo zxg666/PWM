@@ -1,11 +1,3 @@
-/****************************************************************
- *																*		
- * 						      代码库							*
- *                        www.dmaku.com							*
- *       		  努力创建完善、持续更新插件以及模板			*
- * 																*
-****************************************************************/
-
 .ui-dialog-panel{z-index:10000;position:absolute;left:50%;top:50%;/*padding:4px;*/border-radius:5px;}
 .ui-dialog{padding-top:40px;/*border:1px solid #BBBBBB;*/border-radius:1px;background:#fff;}
 /***** 标题区域 *****/

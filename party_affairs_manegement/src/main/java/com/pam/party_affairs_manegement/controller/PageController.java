@@ -1,5 +1,7 @@
 package com.pam.party_affairs_manegement.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pam.party_affairs_manegement.domain.*;
 import com.pam.party_affairs_manegement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class PageController {
     private FunctionService functionService;
     @Autowired
     private ApplyService applyService;
+    @Autowired
+    private MessageService messageService;
 
      //跳转到首页
     @RequestMapping("index")
@@ -82,6 +86,19 @@ public class PageController {
         List<RoleFunction> hotFunction = this.roleFunctionService.selectByVisit(userRoleOrganization.getRoleId());
         System.out.println("hotFunction:"+hotFunction);
         model.addAttribute("hotFunction",hotFunction);
+        //首页公告
+        List<Message> noticeList = this.messageService.selectNotice(userId);
+        model.addAttribute("noticeList",noticeList);
+        //首页公文
+        List<Message> documentList = this.messageService.selectDocument(userId);
+        model.addAttribute("documentList",documentList);
+        //首页个人任务
+        List<Message> taskList = this.messageService.selectTask(userId);
+        model.addAttribute("taskList",taskList);
+        //首页消息
+        List<Message> messageList = this.messageService.selectMessage(userId);
+        model.addAttribute("messageList",messageList);
+        System.out.println("首页消息："+messageList);
         return "home";
     }
     //跳转到工作页
@@ -173,7 +190,47 @@ public class PageController {
         model.addAttribute("usersList",usersList);
         return "service/member/apply_edit";
     }
+    //跳转到流动审批页
+    @RequestMapping("flowEdit/{ID}")
+    public String flowEdit(@PathVariable("ID") Integer ID,Model model){
+        Users users = this.userService.selectById(ID);
+        model.addAttribute("apply",users);
+        System.out.println("apply:"+users);
+        List<Users> usersList = this.userService.selectAll();
+        System.out.println("usersList"+usersList);
+        model.addAttribute("usersList",usersList);
+        return "service/flow/flow_edit";
+    }
 
+    //跳转到首页信息展示页面
+    @RequestMapping("show/{messageId}")
+    public String show(@PathVariable("messageId") Integer messageId,Model model){
+        Message message = this.messageService.selectById(messageId);
+        model.addAttribute("message",message);
+        System.out.println("展示的资源:"+message);
+        return "show";
+    }
+
+    //跳转到资源添加页面
+    @RequestMapping("message_add")
+    public String organization_add(Model model){
+        List<Users> usersList = this.userService.selectAll();
+        System.out.println("usersList"+usersList);
+        model.addAttribute("usersList",usersList);
+        return "resources/message/message_add";
+    }
+
+    //跳转到资源变更页面
+    @RequestMapping("message_edit/{messageId}")
+    public String message_edit(@PathVariable("messageId") Integer messageId, Model model){
+        Message message = this.messageService.selectById(messageId);
+        model.addAttribute("message",message);
+        System.out.println("message:"+message);
+        List<Users> usersList = this.userService.selectAll();
+        System.out.println("usersList"+usersList);
+        model.addAttribute("usersList",usersList);
+        return "resources/message/message_edit";
+    }
     //跳转到成功页面
     @RequestMapping("success")
     public String success(){

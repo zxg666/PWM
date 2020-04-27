@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>文件审批</title>
+    <title>党员进出审批</title>
     <link href="/css/tail.css" rel="stylesheet" type="text/css" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/js/jquery.js"></script>
@@ -22,8 +22,8 @@
             <table class="table" >
                 <tbody>
                 <tr>
-                    <td style="border-top: none">文件标题：</td>
-                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text" th:value="${apply.title}"></td>
+                    <td style="border-top: none">申请人：</td>
+                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text" th:value="${apply.userName}"></td>
                 </tr>
                 <tr>
                     <td>会签人：</td>
@@ -37,11 +37,11 @@
                 </tr>
                 <tr>
                     <td style="line-height: 260px">申请内容：</td>
-                    <td colspan = "8" style="text-align: left"><textarea  id="editor" style="width: 100%;height: 260px" th:text="${apply.content}"></textarea></td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" style="width: 100%;height: 260px">流入</textarea></td>
                 </tr>
                 <tr>
                     <td style="line-height: 50px">审批意见：</td>
-                    <td colspan = "8" style="text-align: left"><textarea  id="editor" name="opinion" style="width: 100%;height: 50px"></textarea></td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" name="opinion" style="width: 100%;height: 50px">同意</textarea></td>
                 </tr>
                 </tbody>
             </table>
@@ -49,7 +49,7 @@
     </div>
     <div class="bot_btn">
         <input class="btn" type="submit" value="通过"/>
-        <button class="btn btn1"><a href="/service/memberManagement" target="right">打回</a></button>
+        <button class="btn btn1"><a href="/service/flowManagement" target="right">打回</a></button>
     </div>
 </form>
 </div>

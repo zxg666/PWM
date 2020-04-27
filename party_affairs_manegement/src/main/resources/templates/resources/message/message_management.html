@@ -47,49 +47,63 @@
             $(".tree_left").css('height', height01 - 35+"px");
         }
     </script>
-    <title>领导成员管理</title>
+    <title>通知管理</title>
 </head>
 <body onload="change()">
-<div class="title"><h2>领导成员管理</h2></div>
+<div class="title"><h2>通知管理</h2></div>
 <div class="l_left" style="width: 100%">
-<div class="table-box">
-    <table id="table" class="table_style"
-           data-toggle="table" data-pagination="true">
-        <thead>
-        <tr>
-            <th data-checkbox="true" data-field="id">ID</th>
-            <th data-field="userId" data-sortable="true" data-align="center">党员编号</th>
-            <th data-sortable="true" data-field="userName" data-align="center">党员姓名</th>
-            <th data-sortable="true" data-field="nativePlace" data-align="center">籍贯</th>
-            <th data-field="sex" data-align="center" data-sortable="true">党员性别</th>
-            <th data-field="national" data-align="center" data-sortable="true">民族</th>
-            <th data-field="birthday" data-sortable="true"  data-align="center">出生日期</th>
-            <th data-field="role" data-align="center">职务</th>
-            <th data-field="partyDate" data-sortable="true"  data-align="center">入党时间</th>
-            <th data-field="organization" data-sortable="true" data-align="center">所在党组织组织</th>
-            <th data-field="partyIntroducer" data-align="center" data-sortable="true">入党介绍人</th>
-            <th data-field="telephone" data-align="center">电话</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user,userListStatus:${userList}">
-            <td th:text="${user.ID}"></td>
-            <td th:text="${user.userId}"></td>
-            <td th:text="${user.userName}"></td>
-            <td th:text="${user.nativePlace}"></td>
-            <td th:text="${user.sex}"></td>
-            <td th:text="${user.national}"></td>
-            <td th:text="${user.birthday}"></td>
-            <td th:text="${user.role}"></td>
-            <td th:text="${user.partyDate}"></td>
-            <td th:text="${user.organization}"></td>
-            <td th:text="${user.partyIntroducer}"></td>
-            <td th:text="${user.telephone}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div class="pagination ue-clear"></div>
+    <div class="query">
+        <form action="/organization/organizationList">
+            <div class="tabe_bot">
+                <div class="l_left"><label>标题：</label><input type="text" placeholder="请输入标题" id="title" name="title"></div>
+                <div class="l_left"><label>发送对象：</label><select id="userId" name="sendObject">
+                    <option th:each="usersList,usersListStatus:${usersList}" th:text="${usersList.userId}"></option>
+                </select></div>
+                <button class="tabe_btn " type="submit">查询</button>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+    <div class="table-box">
+        <table id="table" class="table_style"
+               data-toggle="table" data-pagination="true">
+            <thead>
+            <tr>
+                <th data-checkbox="true" data-field="id">ID</th>
+                <th data-field="messageId" data-align="center">消息ID</th>
+                <th data-field="title" data-sortable="true" data-align="center">标题</th>
+                <th data-field="sendObject" data-sortable="true" data-align="center">发送对象</th>
+                <th data-field="status" data-sortable="true" data-align="center">状态</th>
+                <th data-field="remarks" data-sortable="true" data-align="center">备注</th>
+                <th data-field="completionTime"data-sortable="true"  data-align="center">完成时间</th>
+                <th data-align="center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="message,messageListStatus:${messageList}">
+                <td th:text="${message.messageId}"></td>
+                <td th:text="${message.messageId}"></td>
+                <td th:text="${message.title}"></td>
+                <td th:text="${message.sendObject}"></td>
+                <td th:text="${message.status}"></td>
+                <td th:text="${message.remarks}"></td>
+                <td th:text="${#dates.format(message.sendTime, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <a style="text-decoration:none;padding: 5px" href="/page/message_add">
+                        <img src="/images/addico.png">
+                    </a>
+                    <a style="text-decoration:none;padding: 5px" th:href="'/resource/delete/'+${message.messageId}">
+                        <img src="/images/delico.png">
+                    </a>
+                    <a style="text-decoration:none;padding: 5px" th:href="'/page/message_edit/'+${message.messageId}">
+                        <img src="/images/edtico.png">
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination ue-clear"></div>
 </div>
 </body>
 <script type="text/javascript" src="/js/jquery.js"></script>

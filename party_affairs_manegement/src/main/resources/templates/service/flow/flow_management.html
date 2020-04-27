@@ -79,6 +79,7 @@
             <th data-field="organization" data-sortable="true" data-align="center">所在党组织组织</th>
             <th data-field="partyIntroducer" data-align="center" data-sortable="true">入党介绍人</th>
             <th data-field="telephone" data-align="center">电话</th>
+            <th data-align="center">审批</th>
         </tr>
         </thead>
         <tbody>
@@ -96,6 +97,11 @@
             <td th:text="${user.organization}"></td>
             <td th:text="${user.partyIntroducer}"></td>
             <td th:text="${user.telephone}"></td>
+            <td>
+                <a style="text-decoration:none;padding: 5px" th:href="'/page/flowEdit/'+${user.userId}">
+                    <img src="/images/edtico.png">
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -1,6 +1,7 @@
 package com.pam.party_affairs_manegement.controller;
 
 import com.pam.party_affairs_manegement.domain.Organization;
+import com.pam.party_affairs_manegement.domain.UserRoleOrganization;
 import com.pam.party_affairs_manegement.mapper.OrganizationMapper;
 import com.pam.party_affairs_manegement.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,6 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
-    //登录页的下拉框
-    @RequestMapping("findAll")
-    public String findAllOrganization(Model model){
-        List<Organization> organizationList = this.organizationService.selectAll();
-        System.out.println(organizationList);
-        model.addAttribute("organizationList",organizationList);
-        return "login";
-    }
-
     //党组织管理
     @RequestMapping("organizationManagement")
     public String functionManagement(Model model){
@@ -35,7 +27,6 @@ public class OrganizationController {
         System.out.println("organizationList:"+organizationList);
         return "basic/organization/organization_management";
     }
-
 
     //按组织名和领导查询
     @RequestMapping("organizationList")

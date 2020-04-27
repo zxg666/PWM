@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pam.party_affairs_manegement.mapper.MessageMapper">
+	<resultMap type="com.pam.party_affairs_manegement.domain.Message" id="BaseResultMap">
+		<id column="message_id" property="messageId" jdbcType="INTEGER"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="content" property="content" jdbcType="VARCHAR"/>
+		<result column="sender" property="sender" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+		<result column="send_time" property="sendTime" jdbcType="DATE"/>
+		<result column="message_type" property="messageType" jdbcType="VARCHAR"/>
+		<result column="send_object" property="sendObject" jdbcType="INTEGER"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
+		<result column="task_flag" property="taskFlag" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id="selectNotice" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type in('警示信息','新闻活动','历史信息')
+		and status='未读'
+		and (send_object=#{sendObject} or send_object=0)
+		order by send_time limit 0,5
+	</select>
+	<select id="selectDocument" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='公文'
+		and (send_object=#{sendObject} or send_object=0)
+		order by send_time limit 0,5
+	</select>
+	<select id="selectTask" resultMap="BaseResultMap">
+		select * from tb_message
+		where task_flag='是'
+		and status='未读'
+		and (send_object=#{sendObject} or send_object=0)
+		order by send_time limit 0,5
+	</select>
+	<select id="selectMessage" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='消息'
+		and status='未读'
+		and (send_object=#{sendObject} or send_object=0)
+		order by send_time limit 0,5
+	</select>
+	<select id="selectByWarning" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='警示信息'
+	</select>
+	<select id="selectWarningByTitle" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='警示信息'
+		and title=#{title}
+		or send_object=#{sendObject}
+	</select>
+	<select id="selectByNews" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='新闻活动'
+	</select>
+	<select id="selectNewsByTitle" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='新闻活动'
+		and title=#{title}
+		or send_object=#{sendObject}
+	</select>
+	<select id="selectByCertificate" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='证明信'
+	</select>
+	<select id="selectCertificateByTitle" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='证明信'
+			and title=#{title}
+		   or send_object=#{sendObject}
+	</select>
+	<select id="selectByLetter" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='介绍信'
+	</select>
+	<select id="selectLetterByTitle" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='介绍信'
+		and title=#{title}
+		or send_object=#{sendObject}
+	</select>
+	<select id="selectByHistory" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='历史信息'
+	</select>
+	<select id="selectHistoryByTitle" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_type='历史信息'
+		and title=#{title}
+		or send_object=#{sendObject}
+	</select>
+	<insert id="insert"  parameterType="com.pam.party_affairs_manegement.domain.Message">
+		insert into tb_message(title,content,sender,remarks,send_time,message_type,send_object,task_flag,status)
+		values(#{title},#{content},#{sender},#{remarks},#{sendTime},#{messageType},#{sendObject},#{taskFlag},#{status})
+	</insert>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from tb_message
+	</select>
+
+	<select id="selectByName" resultMap="BaseResultMap">
+		select * from tb_message
+		where title=#{title}
+		or type=#{type}
+	</select>
+
+	<select id="selectById" resultMap="BaseResultMap">
+		select * from tb_message
+		where message_id=#{messageId}
+	</select>
+
+	<update id="update" parameterType="com.pam.party_affairs_manegement.domain.Message">
+		update tb_message set message_id=#{messageId},title=#{title},content=#{content},status=#{status},
+							  remarks=#{remarks},message_type=#{messageType},send_object=#{sendObject},
+							  task_flag=#{taskFlag}
+		where message_id=#{messageId}
+	</update>
+	
+	<delete id="delete" parameterType="com.pam.party_affairs_manegement.domain.Message">
+		delete from tb_message
+		where message_id=#{messageId}
+	</delete>
+</mapper>

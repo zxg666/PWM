@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>消息变更</title>
+    <link href="/css/tail.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+        function change() {
+            var height01 = $(window).height();
+            $(".top").css('height', height01 - 35+"px");
+        }
+    </script>
+</head>
+<body style="border-radius: 8px" onload="change(),init()">
+<form id="form_demo" >
+<div class="top">
+    <div>
+        <div class="top_out">
+            <table class="table" >
+                <tbody>
+                <tr>
+                    <td style="border-top: none" >资源标题：<i class="i_start"></i></td>
+                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text"  name ="title" minlength="2"  required id="tit"></td>
+                </tr>
+                <tr>
+                    <td>推送对象：<i class="i_start"></i></td>
+                   <td colspan="6">全部推送：<select style="width: 40%" id="part" name="sendObject">
+                       <option>0</option>
+                   </select> 按人员推送：<select style="width: 40%" id="person" name="sendObject">
+                       <option>选择人员</option>
+                       <option th:each="usersList,usersListStatus:${usersList}" th:text="${usersList.userName}"></option>
+                   </select></td>
+                </tr>
+                <tr>
+                    <td>是否发布任务：</td>
+                    <td  style="text-align: left"><select name="taskFlag">
+                        <option>是</option>
+                        <option>否</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td style="line-height: 240px">资源内容：</td>
+                    <td colspan = "8" style="text-align: left"><textarea  id="editor" name="content" style="width: 100%;height: 240px"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bot_btn">
+        <input class="btn" type="submit" value="发送"/>
+        <button class="btn btn1"><a href="/resources/newsManagement" target="right">返回</a></button>
+    </div>
+</div>
+</form>
+</body>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/date/js/laydate.js"></script>
+</html>

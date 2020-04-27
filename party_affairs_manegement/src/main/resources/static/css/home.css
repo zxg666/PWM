@@ -41,8 +41,8 @@
 .matter .content .matter-content .today .year{ line-height:33px; font-size:13px; color:#ffffff; text-align:center;}
 .matter .content .matter-content .today .date{ text-align:center;line-height:82px; color:#e22f1d; font-size:48px;}
 .matter .content .matter-content .matter-list li{ line-height:25px;}
-.matter .content .matter-content .matter-list li .matter-time{ float:left; padding-left:16px; width:36px; background:url(../images/listico.png) no-repeat left center; color:#969696;}
-.matter .content .matter-content .matter-list li .matter-title{ float:left; margin-left:18px; color:#000;}
+.matter .content .matter-content .matter-list li .matter-time{ float:left; padding-left:8px; width:200px; background:url(../images/listico.png) no-repeat left center; color:#969696;}
+.matter .content .matter-content .matter-list li .matter-title{ float:left; margin-left:-18px; color:#000;}
 .matter .content .matter-content .matter-list li .matter-title:hover{ text-decoration:underline;}
 
 /*领导值岗*/

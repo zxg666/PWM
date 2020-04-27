@@ -81,6 +81,12 @@ public class ServiceController {
         return "redirect:/service/memberManagement";
     }
 
+    //缴费情况
+    @RequestMapping("fareManagement")
+    public String fareManagement(){
+        return "/service/member/fare_management";
+    }
+
     //领导成员管理
     @RequestMapping("leaderManagement")
     public String leaderManagement(Model model){

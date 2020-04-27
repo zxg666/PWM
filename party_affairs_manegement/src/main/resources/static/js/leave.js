@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2016/8/4.
- */
-
 var person, type, currentID, time, flag = true;
 function Leaveload() {
     $('#table').bootstrapTable({

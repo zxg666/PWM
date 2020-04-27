@@ -1,10 +1,7 @@
 package com.pam.party_affairs_manegement;
 
 import com.pam.party_affairs_manegement.domain.*;
-import com.pam.party_affairs_manegement.mapper.FunctionMapper;
-import com.pam.party_affairs_manegement.mapper.RoleFunctionMapper;
-import com.pam.party_affairs_manegement.mapper.RoleMapper;
-import com.pam.party_affairs_manegement.mapper.UserRoleOrganizationMapper;
+import com.pam.party_affairs_manegement.mapper.*;
 import com.pam.party_affairs_manegement.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -259,4 +256,36 @@ public class PartyAffairsManegementApplicationTests {
         }
     }
 
+    @Autowired
+    private MessageService messageService;
+    @Test
+    public void insertMessage(){
+        Message message = new Message();
+        message.setTitle("入党申请");
+        message.setContent("我恳请加入中国共产党，为党的的事业贡献我毕生的力量，全心全意地区服务人民！");
+        message.setSender("周某人");
+        message.setMessageType("公告");
+        message.setSendObject(1139301);
+        message.setSendTime(new Date());
+        message.setStatus("未读");
+        this.messageService.insert(message);
+    }
+    @Test
+    public void selectByMessage(){
+        System.out.println(this.messageService.selectAll());
+    }
+    @Test
+    public void deleteMessage(){
+        System.out.println(this.messageService.delete(1));
+    }
+    @Test
+    public void updateMessage(){
+        Message message =  new Message();
+        message.setMessageId(1);
+        this.messageService.update(message);
+    }
+    @Test
+    public void selectMessageAll(){
+        System.out.println(this.messageService.selectAll());
+    }
 }
